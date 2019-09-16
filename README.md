@@ -1,12 +1,11 @@
-# _Doctor Search  _
+# _Stargazing_
 
-#### _{Locate a doctor that specializes in your condition}, {Sept. 13th 2019 }_
-
-#### By _**{Hailey Gaylor}**_
+#### _{A stargazing ap that will allow you to locate constellations based on location of choice.  }, {Sept. 2019 }_
+#### By _**{Hailey Gaylor, Christine Frank, Jennifer, Dom}**_
 
 ## Description
 
-_{This ap will allow you to input a symptom and find a doctor in your area.}_
+_{The ap will give you the availability to learn more about the constellations via a tutorial then leading to a timed game to check your knowledge. You will have the option of looking up the location of choice and testing your knowledge.}_
 
 ## Setup/Installation Requirements
 
@@ -16,13 +15,18 @@ _{This ap will allow you to input a symptom and find a doctor in your area.}_
 * _revel in our greatness!_
 
 
-_{Be sure to read up on the documentation for the Api key}_
+_{}_
 
 ## Specs
 
 | Behavior | Input | Output |
 | ------------- |:-------------:| -----:|
-| ------------- | :-------------: | -----: |
+| User can view constellation menu | 'View Constellation, start tutorial, play game' | 'display map of constellation, display tutorial, start game ' |
+| User can select 'View constellation'  | on-click, view constellation  | constellation map appears with all stars showing.|
+|  User can start tutorial   | on-click, start tutorial | Walks users through the map of starts in all of the constellations provided. |
+|  User can play the "locate constellation" game  | on-click, start game/time to connect the constellation by your best knowledge | Display successful constellations with a green line and keep the attempts in white |
+|  User can clear the game   | "clear map" | all picked constellations will clear from the map |
+|  User can end game  | end game | bring user back to the start game page. |
 
 
 
@@ -32,18 +36,18 @@ _{Be sure to read up on the documentation for the Api key}_
 
 ## Known Bugs
 
-_{ none at this time, if you find one.... run away. }_
+_{ UPDATE AS YOU GO }_
 
 ## Support and contact details
 
-_{Ophrah Winfrey, Dr. Phil....}_
+_{Christine Frank, Jennifer, Doom, Hailey }_
 
 ## Technologies Used
 
-_{Github, API calls, Promises.}_
+_{Github, API calls, Mobile device/computer.}_
 
 ### License
 
 *{License pending upon job}*
 
-Copyright (c) 2016 **_{Hailey Gaylor}_**
+Copyright (c) 2016 **_{Hailey Gaylor, Christine Frank, Jennifer, Dom}_**
