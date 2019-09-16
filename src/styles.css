@@ -1,0 +1,22 @@
+body {
+  /* background-image: url("https://www.filepicker.io/api/file/Ko1bvEHySETdxMJHqCgJ"); */
+  color: white;
+  background-color: black;
+}
+
+.jumbotron {
+  background-image: url("https://www.filepicker.io/api/file/Ko1bvEHySETdxMJHqCgJ");
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  font-family: Bangers;
+
+}
+.container {
+  text-align: center;
+}
+
+.column {
+  margin: 50px;
+
+}
