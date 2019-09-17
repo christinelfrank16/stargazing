@@ -15,11 +15,12 @@ export function plotConstellation(constellationObj, centerRa, centerDec, fov, di
   const coordinateObj = createCoordinate(constellationObj, centerRa, centerDec, fov, displayRotation, screenWidth, screenHeight);
 
   coordinateObj.stars.forEach(function(star) {
+    console.log(star.starName);
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
-    ctx.strokeStyle = "#7DFAF2";
+    ctx.strokeStyle = "#faef8e";
     ctx.beginPath();
-    ctx.arc(star.xy.x, star.xy.y, 30, 0, 2 * Math.PI);
+    ctx.strokeRect(star.xy.x, star.xy.y, 5,5);
     ctx.stroke();
   });
   return true;
