@@ -6,45 +6,42 @@ export class CelestialCoordinates {
     this.dec = dec;
   }
 
-  coverttoXYfromCelestial(ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight){
-    const altAz = this.convertToAltAz(ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight);
-    const xy = altAz.convertToXY(ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight);
+  coverttoXYfromCelestial(centerRa, centerDec, fov, displayRotation, screenWidth, screenHeight) {
+    const altAz = this.convertToAltAz(centerRa, centerDec, fov, displayRotation, screenWidth, screenHeight);
+    const xy = altAz.convertToXY(centerRa, centerDec, fov, displayRotation, screenWidth, screenHeight);
     return xy;
   }
 
-  convertToAltAz(ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight) {
+  convertToAltAz(centerRa, centerDec, displayFOV, displayROT, screenWidth, screenHeight) {
     //Ra is in hours
     //Dec, fov/angle, displayRotation all degrees
     //displayWidth and displayHeight in pixels
-    const PI = 3.1415926535897932384626433832795;
-    const TWOPI = 6.283185307179586476925286766559;
     const HALFPI = 1.5707963267948966192313216916398;
     //rads = pi/180
     const RADS = 0.01745329251994329576923690768489;
     //hours *360/24 = degrees
-    const HOURSTODEG= 360/24;
+    const HOURSTODEG = 360 / 24;
 
     //convert everything to radians
-    let ra = this.ra * RADS;
-    let dec = this.dec * RADS;
-    centerRA = centerRA * RADS;
-    centerDec = centerDec * RADS;
-    fov = fov * RADS;
-    displayRotation = displayRotation * RADS;
+    const ra = this.ra * HOURSTODEG * RADS;
+    const dec = this.dec * RADS;
+    const fieldRA = centerRa * RADS;
+    const fieldDec = centerDec * RADS;
+
 
     let alt;
-    let az = Math.Atan2(Math.Sin(ceterRa - RA), Math.Cos(ceterRa - RA) * Math.Sin(centerDec) -
-      Math.Tan(Dec) * Math.Cos(centerDec));
-    let tmpval = Math.Sin(centerDec) * Math.Sin(Dec) + Math.Cos(centerDec) * Math.Cos(Dec) *
-      Math.Cos(ceterRa - RA);
+    let az = Math.atan2(Math.sin(fieldRA - ra), Math.cos(fieldRA - ra) * Math.sin(fieldDec) -
+      Math.tan(dec) * Math.cos(fieldDec));
+    let tmpval = Math.sin(fieldDec) * Math.sin(dec) + Math.cos(fieldDec) * Math.cos(dec) *
+      Math.cos(fieldRA - ra);
 
     if (tmpval >= 1.0) {
       alt = HALFPI;
     } else {
-      alt = Math.Asin(tmpval);
+      alt = Math.asin(tmpval);
     }
 
-    let observerCoords = new AltAzCoordinates(az, alt);
+    let observerCoords = new AltAzCoordinates(alt, az);
     return observerCoords;
   }
 }
@@ -56,21 +53,25 @@ export class AltAzCoordinates {
     this.az = az;
   }
 
-  convertToXY(ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight){
-    const TWOPI = 6.283185307179586476925286766559;
+  convertToXY(centerRA, centerDec, displayFOV, displayROT, screenWidth, screenHeight) {
+    const PI = 3.1415926535897932384626433832795;
     const HALFPI = 1.5707963267948966192313216916398;
+    const RADS = 0.01745329251994329576923690768489;
 
-    const nz = 1.0 - 2.0 * this.alt / PI;
-    const az2 = this.az - HALFPI + displayRotation;
-    const tx = (nz * Math.Cos(az2)) * PI / fov;
-    const ty = -(nz * Math.Sin(az2)) * PI / fov;
+    const fieldFOV = displayFOV * RADS;
+    const fieldROT = displayROT * RADS;
 
-    const xyscale = (float(screenWidth) / fieldFOV) / (120.0 / displayFOV);
+    const nz = 1.0 - (2.0 * this.alt / PI);
+    const az2 = this.az - HALFPI + fieldROT;
+    const tx = (nz * Math.cos(az2)) * PI / fieldFOV;
+    const ty = -(nz * Math.sin(az2)) * PI / fieldFOV;
 
-    const x = int((float(screenWidth) / 2.0) + (tx * xyscale));
-    const y = int((float(screenWidth) / 2.0) + (ty * xyscale));
+    const xyscale = (screenWidth / fieldFOV) / (120.0 / displayFOV);
 
-    const xyCoordinates = new xyCoordinates(x,y);
+    const x = Math.floor((screenWidth / 2.0) + (tx * xyscale));
+    const y = Math.floor((screenWidth / 2.0) + (ty * xyscale));
+
+    const xyCoordinates = new XYCoordinates(x, y);
     return xyCoordinates;
   }
 }

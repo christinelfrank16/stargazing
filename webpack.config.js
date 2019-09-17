@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+
 module.exports = {
   entry: './src/main.js',
   output: {
@@ -15,7 +16,9 @@ module.exports = {
   },
 
   plugins: [
-    new UglifyJsPlugin({ sourceMap: true }),
+    new UglifyJsPlugin({
+      sourceMap: true
+    }),
     new CleanWebpackPlugin(['dist']),
     new Dotenv(),
     new HtmlWebpackPlugin({
@@ -25,23 +28,22 @@ module.exports = {
     })
   ],
   module: {
-   rules: [
-     {
-       test: /\.css$/,
-       use: [
-         'style-loader',
-         'css-loader'
-       ]
-     },
-     {
-       test: /\.js$/,
-        exclude: [
-          /node_modules/,
-          /spec/
-        ],
-       loader: "eslint-loader"
-     },
-     {
+    rules: [{
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      },
+      // {
+      //   test: /\.js$/,
+      //   exclude: [
+      //     /node_modules/,
+      //     /spec/
+      //   ],
+      //   loader: "eslint-loader"
+      // },
+      {
         test: /\.js$/,
         exclude: [
           /node_modules/,
@@ -50,8 +52,8 @@ module.exports = {
         loader: "babel-loader",
         options: {
           presets: ['es2015']
+        }
       }
-    }
-   ]
- }
+    ]
+  }
 };
