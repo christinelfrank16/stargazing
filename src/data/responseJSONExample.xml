@@ -1,0 +1,571 @@
+<response>
+  <ra>0.0</ra>
+  <de>89.3</de>
+  <angle>180.0</angle>
+  <max_stars>5000</max_stars>
+  <star id="1017">
+    <catId>30 Psc</catId>
+    <ra>0.0326667</ra>
+    <de>-6.014167</de>
+    <mag>4.41</mag>
+  </star>
+  <star id="1161">
+    <catId>2 Cet</catId>
+    <ra>0.0623333</ra>
+    <de>-17.336111</de>
+    <mag>4.55</mag>
+  </star>
+  <star id="1850">
+    <catId>ζ Scl</catId>
+    <ra>0.0388611</ra>
+    <de>-29.720278</de>
+    <mag>5.01</mag>
+  </star>
+  <star id="2032">
+    <catId>29 Psc</catId>
+    <ra>0.0303889</ra>
+    <de>-3.0275</de>
+    <mag>5.1</mag>
+  </star>
+  <star id="3260">
+    <catId>HD 224893</catId>
+    <ra>0.0269167</ra>
+    <de>61.223056</de>
+    <mag>5.55</mag>
+  </star>
+  <star id="3548">
+    <catId>32 Psc</catId>
+    <ra>0.0415833</ra>
+    <de>8.485556</de>
+    <mag>5.63</mag>
+  </star>
+  <star id="4052">
+    <catId>85 Peg</catId>
+    <ra>0.0361667</ra>
+    <de>27.081944</de>
+    <mag>5.75</mag>
+  </star>
+  <star id="401234">
+    <catId>TYC 1732-2731-1</catId>
+    <ra>0.0361631</ra>
+    <de>27.082091</de>
+    <mag>5.769</mag>
+  </star>
+  <star id="4535">
+    <catId>HD 225009</catId>
+    <ra>0.0433611</ra>
+    <de>66.098889</de>
+    <mag>5.86</mag>
+  </star>
+  <star id="6473">
+    <catId>HD 224784</catId>
+    <ra>0.0085833</ra>
+    <de>59.559722</de>
+    <mag>6.19</mag>
+  </star>
+  <star id="6676">
+    <catId>HD 224870</catId>
+    <ra>0.0220278</ra>
+    <de>49.981667</de>
+    <mag>6.22</mag>
+  </star>
+  <star id="6783">
+    <catId>HD 225094</catId>
+    <ra>0.0571389</ra>
+    <de>63.641944</de>
+    <mag>6.24</mag>
+  </star>
+  <star id="6863">
+    <catId>HD 224906</catId>
+    <ra>0.0288333</ra>
+    <de>42.367222</de>
+    <mag>6.25</mag>
+  </star>
+  <star id="6864">
+    <catId>HD 225045</catId>
+    <ra>0.0493333</ra>
+    <de>-20.046111</de>
+    <mag>6.25</mag>
+  </star>
+  <star id="7131">
+    <catId>HD 225136</catId>
+    <ra>0.0644167</ra>
+    <de>66.712222</de>
+    <mag>6.29</mag>
+  </star>
+  <star id="7375">
+    <catId>31 Psc</catId>
+    <ra>0.0400556</ra>
+    <de>8.956944</de>
+    <mag>6.32</mag>
+  </star>
+  <star id="7841">
+    <catId>HD 224801</catId>
+    <ra>0.0121389</ra>
+    <de>45.253333</de>
+    <mag>6.38</mag>
+  </star>
+  <star id="8248">
+    <catId>HD 225069</catId>
+    <ra>0.0521389</ra>
+    <de>-24.145278</de>
+    <mag>6.44</mag>
+  </star>
+  <star id="8386">
+    <catId>HD 224758</catId>
+    <ra>0.0066389</ra>
+    <de>26.918333</de>
+    <mag>6.46</mag>
+  </star>
+  <star id="1132645">
+    <catId>HD 224890</catId>
+    <ra>0.0276274</ra>
+    <de>73.611847</de>
+    <mag>6.498</mag>
+  </star>
+  <star id="684096">
+    <catId>HD 224721</catId>
+    <ra>0.0035542</ra>
+    <de>38.304051</de>
+    <mag>6.53</mag>
+  </star>
+  <star id="269353">
+    <catId>HD 225073</catId>
+    <ra>0.0536982</ra>
+    <de>17.552268</de>
+    <mag>6.593</mag>
+  </star>
+  <star id="400270">
+    <catId>HD 224907</catId>
+    <ra>0.0285795</ra>
+    <de>24.253109</de>
+    <mag>6.598</mag>
+  </star>
+  <star id="684174">
+    <catId>HD 224699</catId>
+    <ra>0.0003346</ra>
+    <de>38.859278</de>
+    <mag>6.619</mag>
+  </star>
+  <star id="686039">
+    <catId>HD 225068</catId>
+    <ra>0.0523189</ra>
+    <de>42.747905</de>
+    <mag>6.717</mag>
+  </star>
+  <star id="821185">
+    <catId>HD 225124</catId>
+    <ra>0.0616234</ra>
+    <de>48.436901</de>
+    <mag>6.786</mag>
+  </star>
+  <star id="1057094">
+    <catId>HD 224980</catId>
+    <ra>0.0382519</ra>
+    <de>60.703167</de>
+    <mag>6.786</mag>
+  </star>
+  <star id="687121">
+    <catId>HD 224894</catId>
+    <ra>0.0260109</ra>
+    <de>44.675404</de>
+    <mag>6.821</mag>
+  </star>
+  <star id="401972">
+    <catId>HD 224895</catId>
+    <ra>0.0264284</ra>
+    <de>28.423692</de>
+    <mag>6.838</mag>
+  </star>
+  <star id="1062452">
+    <catId>HD 224826</catId>
+    <ra>0.0146874</ra>
+    <de>66.84801</de>
+    <mag>6.898</mag>
+  </star>
+  <star id="1328552">
+    <catId>HD 224974</catId>
+    <ra>0.0379673</ra>
+    <de>-13.407433</de>
+    <mag>6.903</mag>
+  </star>
+  <star id="1213770">
+    <catId>HD 224945</catId>
+    <ra>0.0340605</ra>
+    <de>-2.766169</de>
+    <mag>6.931</mag>
+  </star>
+  <star id="1732604">
+    <catId>HD 225101</catId>
+    <ra>0.0572995</ra>
+    <de>-36.251194</de>
+    <mag>6.973</mag>
+  </star>
+  <star id="1059409">
+    <catId>HD 224792</catId>
+    <ra>0.0115676</ra>
+    <de>62.175899</de>
+    <mag>7.053</mag>
+  </star>
+  <star id="1056485">
+    <catId>HD 224855</catId>
+    <ra>0.0210709</ra>
+    <de>60.355291</de>
+    <mag>7.066</mag>
+  </star>
+  <star id="1732614">
+    <catId>HD 224936</catId>
+    <ra>0.0320202</ra>
+    <de>-37.229955</de>
+    <mag>7.068</mag>
+  </star>
+  <star id="136142">
+    <catId>HD 225151</catId>
+    <ra>0.0655827</ra>
+    <de>14.378865</de>
+    <mag>7.085</mag>
+  </star>
+  <star id="1875084">
+    <catId>HD 224949</catId>
+    <ra>0.0333897</ra>
+    <de>-37.901879</de>
+    <mag>7.099</mag>
+  </star>
+  <star id="9268">
+    <catId>HD 224960</catId>
+    <ra>0.0353611</ra>
+    <de>-14.676111</de>
+    <mag>7.1</mag>
+  </star>
+  <star id="1586934">
+    <catId>HD 224862</catId>
+    <ra>0.0225646</ra>
+    <de>-28.725018</de>
+    <mag>7.111</mag>
+  </star>
+  <star id="1062620">
+    <catId>HD 225010</catId>
+    <ra>0.044012</ra>
+    <de>66.100379</de>
+    <mag>7.151</mag>
+  </star>
+  <star id="10367">
+    <catId>HD 224875</catId>
+    <ra>0.0231065</ra>
+    <de>6.791471</de>
+    <mag>7.216</mag>
+  </star>
+  <star id="1131807">
+    <catId>HD 224891</catId>
+    <ra>0.0266593</ra>
+    <de>72.236615</de>
+    <mag>7.22</mag>
+  </star>
+  <star id="268645">
+    <catId>HD 225001</catId>
+    <ra>0.0423333</ra>
+    <de>16.256562</de>
+    <mag>7.229</mag>
+  </star>
+  <star id="1062564">
+    <catId>HD 224938</catId>
+    <ra>0.0329426</ra>
+    <de>66.437897</de>
+    <mag>7.262</mag>
+  </star>
+  <star id="1213325">
+    <catId>HD 224726</catId>
+    <ra>0.0032282</ra>
+    <de>-0.360457</de>
+    <mag>7.271</mag>
+  </star>
+  <star id="1204539">
+    <catId>HD 225019</catId>
+    <ra>0.0449464</ra>
+    <de>82.973205</de>
+    <mag>7.287</mag>
+  </star>
+  <star id="1056858">
+    <catId>HD 224868</catId>
+    <ra>0.0226731</ra>
+    <de>60.839197</de>
+    <mag>7.294</mag>
+  </star>
+  <star id="1062541">
+    <catId>HD 224918</catId>
+    <ra>0.0302523</ra>
+    <de>66.306034</de>
+    <mag>7.33</mag>
+  </star>
+  <star id="821322">
+    <catId>HD 224720</catId>
+    <ra>0.0024894</ra>
+    <de>46.939997</de>
+    <mag>7.341</mag>
+  </star>
+  <star id="9415">
+    <catId>HD 225028</catId>
+    <ra>0.0464381</ra>
+    <de>2.130128</de>
+    <mag>7.342</mag>
+  </star>
+  <star id="1130643">
+    <catId>TYC 4298-1460-1</catId>
+    <ra>0.0179219</ra>
+    <de>69.575564</de>
+    <mag>7.397</mag>
+  </star>
+  <star id="1132661">
+    <catId>HD 225093</catId>
+    <ra>0.0566576</ra>
+    <de>73.174504</de>
+    <mag>7.407</mag>
+  </star>
+  <star id="135572">
+    <catId>HD 225107</catId>
+    <ra>0.0584748</ra>
+    <de>12.356823</de>
+    <mag>7.441</mag>
+  </star>
+  <star id="1448807">
+    <catId>HD 224763</catId>
+    <ra>0.0074859</ra>
+    <de>-16.697012</de>
+    <mag>7.446</mag>
+  </star>
+  <star id="686130">
+    <catId>HD 225125</catId>
+    <ra>0.0623441</ra>
+    <de>42.023524</de>
+    <mag>7.456</mag>
+  </star>
+  <star id="822678">
+    <catId>HD 224993</catId>
+    <ra>0.0394454</ra>
+    <de>50.499818</de>
+    <mag>7.464</mag>
+  </star>
+  <star id="269837">
+    <catId>HD 225097</catId>
+    <ra>0.0572041</ra>
+    <de>20.665534</de>
+    <mag>7.492</mag>
+  </star>
+  <star id="539658">
+    <catId>HD 225023</catId>
+    <ra>0.0461187</ra>
+    <de>35.815469</de>
+    <mag>7.517</mag>
+  </star>
+  <star id="135117">
+    <catId>HD 224724</catId>
+    <ra>0.0044258</ra>
+    <de>8.007232</de>
+    <mag>7.529</mag>
+  </star>
+  <star id="136277">
+    <catId>HD 224742</catId>
+    <ra>0.0049704</ra>
+    <de>13.31223</de>
+    <mag>7.563</mag>
+  </star>
+  <star id="687122">
+    <catId>HD 224955</catId>
+    <ra>0.0353634</ra>
+    <de>44.532215</de>
+    <mag>7.577</mag>
+  </star>
+  <star id="821354">
+    <catId>HD 224999</catId>
+    <ra>0.0417189</ra>
+    <de>47.422894</de>
+    <mag>7.615</mag>
+  </star>
+  <star id="9794">
+    <catId>HD 224760</catId>
+    <ra>0.0065391</ra>
+    <de>2.675483</de>
+    <mag>7.639</mag>
+  </star>
+  <star id="1214347">
+    <catId>HD 224840</catId>
+    <ra>0.0187018</ra>
+    <de>-5.874345</de>
+    <mag>7.647</mag>
+  </star>
+  <star id="402077">
+    <catId>HD 225036</catId>
+    <ra>0.0473514</ra>
+    <de>28.251907</de>
+    <mag>7.653</mag>
+  </star>
+  <star id="1061495">
+    <catId>HD 224919</catId>
+    <ra>0.0304769</ra>
+    <de>65.455572</de>
+    <mag>7.653</mag>
+  </star>
+  <star id="1586993">
+    <catId>HD 225155</catId>
+    <ra>0.0648226</ra>
+    <de>-28.393818</de>
+    <mag>7.653</mag>
+  </star>
+  <star id="1062473">
+    <catId>HD 224992</catId>
+    <ra>0.0401806</ra>
+    <de>67.162823</de>
+    <mag>7.66</mag>
+  </star>
+  <star id="1129705">
+    <catId>HD 225123</catId>
+    <ra>0.0626712</ra>
+    <de>68.876648</de>
+    <mag>7.661</mag>
+  </star>
+  <star id="135626">
+    <catId>HD 224759</catId>
+    <ra>0.006893</ra>
+    <de>12.26713</de>
+    <mag>7.685</mag>
+  </star>
+  <star id="1177760">
+    <catId>HD 225020</catId>
+    <ra>0.0462596</ra>
+    <de>80.282273</de>
+    <mag>7.704</mag>
+  </star>
+  <star id="824148">
+    <catId>HD 225021</catId>
+    <ra>0.0444689</ra>
+    <de>51.4724</de>
+    <mag>7.707</mag>
+  </star>
+  <star id="1130534">
+    <catId>HD 224854</catId>
+    <ra>0.0218537</ra>
+    <de>70.928939</de>
+    <mag>7.749</mag>
+  </star>
+  <star id="1732196">
+    <catId>HD 225061</catId>
+    <ra>0.0501487</ra>
+    <de>-34.743937</de>
+    <mag>7.766</mag>
+  </star>
+  <star id="1731735">
+    <catId>HD 225120</catId>
+    <ra>0.060292</ra>
+    <de>-31.094169</de>
+    <mag>7.791</mag>
+  </star>
+  <star id="1214307">
+    <catId>HD 224829</catId>
+    <ra>0.0174329</ra>
+    <de>-5.834998</de>
+    <mag>7.804</mag>
+  </star>
+  <star id="822650">
+    <catId>HD 224968</catId>
+    <ra>0.0368273</ra>
+    <de>49.771084</de>
+    <mag>7.835</mag>
+  </star>
+  <star id="400390">
+    <catId>HD 224806</catId>
+    <ra>0.0132894</ra>
+    <de>23.538219</de>
+    <mag>7.837</mag>
+  </star>
+  <star id="1448736">
+    <catId>HD 224910</catId>
+    <ra>0.0291635</ra>
+    <de>-16.53165</de>
+    <mag>7.842</mag>
+  </star>
+  <star id="1207223">
+    <catId>HD 224991</catId>
+    <ra>0.0410587</ra>
+    <de>87.032712</de>
+    <mag>7.843</mag>
+  </star>
+  <star id="947666">
+    <catId>HD 224837</catId>
+    <ra>0.0184769</ra>
+    <de>53.166941</de>
+    <mag>7.886</mag>
+  </star>
+  <star id="9876">
+    <catId>HD 225127</catId>
+    <ra>0.0611399</ra>
+    <de>3.906978</de>
+    <mag>7.895</mag>
+  </star>
+  <star id="685161">
+    <catId>HD 225054</catId>
+    <ra>0.0505916</ra>
+    <de>39.995146</de>
+    <mag>7.899</mag>
+  </star>
+  <star id="686014">
+    <catId>HD 225105</catId>
+    <ra>0.0592724</ra>
+    <de>42.352108</de>
+    <mag>7.915</mag>
+  </star>
+  <star id="1213816">
+    <catId>HD 224776</catId>
+    <ra>0.0088498</ra>
+    <de>-3.306322</de>
+    <mag>7.925</mag>
+  </star>
+  <star id="269220">
+    <catId>HD 225106</catId>
+    <ra>0.0584282</ra>
+    <de>19.381498</de>
+    <mag>7.926</mag>
+  </star>
+  <star id="538723">
+    <catId>HD 224982</catId>
+    <ra>0.0393513</ra>
+    <de>34.84021</de>
+    <mag>7.933</mag>
+  </star>
+  <star id="686104">
+    <catId>HD 225022</catId>
+    <ra>0.0451255</ra>
+    <de>42.920658</de>
+    <mag>7.935</mag>
+  </star>
+  <star id="949458">
+    <catId>HD 225095</catId>
+    <ra>0.0575408</ra>
+    <de>55.550897</de>
+    <mag>7.938</mag>
+  </star>
+  <star id="1129671">
+    <catId>HD 224825</catId>
+    <ra>0.0159777</ra>
+    <de>68.457487</de>
+    <mag>7.966</mag>
+  </star>
+  <star id="1585918">
+    <catId>HD 225076</catId>
+    <ra>0.0529783</ra>
+    <de>-24.588256</de>
+    <mag>7.969</mag>
+  </star>
+  <star id="953475">
+    <catId>HD 224940</catId>
+    <ra>0.0346092</ra>
+    <de>59.94009</de>
+    <mag>7.979</mag>
+  </star>
+  <star id="537453">
+    <catId>HD 224769</catId>
+    <ra>0.0075877</ra>
+    <de>31.225964</de>
+    <mag>7.996</mag>
+  </star>
+  <msgs/>
+</response>
