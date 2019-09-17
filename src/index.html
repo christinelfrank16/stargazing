@@ -4,28 +4,65 @@
     <title>Stargazing</title>
   </head>
   <body>
-    <div class="topnav">
-      <a class="active" href="#home"> Home </a>
-      <a href="#tutorial"> Tutorial </a>
-      <a href="#starGame"> Stargazer Game </a>
-      <a href="#constellation"> View Constellation </a>
+                        <!-- Menu Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Stargazer</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Constellations</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Tutorial
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Constellations</a>
+            <a class="dropdown-item" href="#">Play Game</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">About</a>
+          </div>
+        </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+    <div class="jumbotron">
+      <p>Stargazer</p>
     </div>
-    <h1>Come stargazing with us!</h1>
-    <p>Welcome to Stargazer, a interactive site that will allow you to view, learn and play with the constellation. What are you waiting for! Go Explore!! </p>
+        <!-- //if you need to disable  -->
+        <!-- <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li> -->
+                     <div class="container">
+                       <h2>Welcome to Stargazer, a interactive site that will allow you to view, learn and play with the constellation.</h2>
+                       <h3> What are you waiting for! Go Explore!! </h3>
+                          <div class ="row">
+                            <div id="constellationMap"class="col-md-2" >
+                              <p>Show me the stars</p>
+                            </div>
+                            <div class="col-md-10" id="tutorial">
+                              <img id="theImage" class="img-fluid" alt="Constellation">
+                            </div>
 
-    <div class="constellationMap">
-
-    </div>
-
-    <div class="tutorial">
-      <p></p>
-
-    </div>
-
-    <div class="game">
-      <button type="button" name="startGame">Begin</button>
-
-    </div>
-
+                            <!-- <figure class="figure">
+                              <img src="https://www.constellation-guide.com/wp-content/uploads/2019/08/Crystal-Ball-Nebula.jpg" class="figure-img img-fluid rounded" alt=" Crystal Ball Nebula (NGC 1514)">
+                              <figcaption class="figure-caption text-right"> Crystal Ball Nebula (NGC 1514)</figcaption>
+                              </figure> -->
+                              <!-- <div class="game">
+                                <button type="button" name="startGame">Begin</button>
+                              </div> -->
+                          </div>
+                        </div>
   </body>
 </html>
