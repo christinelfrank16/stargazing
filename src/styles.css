@@ -1,8 +1,7 @@
-/* body {
-  /* background-image: url("https://www.filepicker.io/api/file/Ko1bvEHySETdxMJHqCgJ"); */
-  /* color: white;
+body {
+  color: grey;
   background-color: black;
-} */
+}
 
 .jumbotron {
   background-image: url("https://www.filepicker.io/api/file/Ko1bvEHySETdxMJHqCgJ");
@@ -29,4 +28,7 @@ h3,h2 {
   font-weight: lighter;
   margin-top: 30px;
 
+}
+#toShow {
+  display:none;
 }

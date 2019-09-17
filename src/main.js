@@ -2,24 +2,28 @@ import $  from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
-import { SkyMap } from './skyMapApi';
-import './img/1.jpg';
-import './img/2.jpg';
-import './img/3.jpg';
-import './img/4.jpg';
+// import { SkyMap } from './skyMapApi';
+import {ConstellationDetails} from './Constellationinfo';
 
-let ImageSwitch = new Array();
-   ImageSwitch[0]='1.jpg';
-   ImageSwitch[1]='2.jpg';
-   ImageSwitch[2]='3.jpg';
-   ImageSwitch[3]='4.jpg';
-   console.log(ImageSwitch[0]);
-   function swapImage()
-   {
-       document.getElementById("#theImage").setAttribute("The Constellation", ImageSwitch[
 
-         Math.round(Math.random()*3)])
-   }
+
+
+ $(document).ready(function() {
+   $('.nav-link[name=constellations]').click(function() {
+      let constellationWiki = new ConstellationDetails();
+      console.log(constellationWiki);
+      $("#toShow").showConstellations();
+
+// $('.showErrors').display('');
+
+
+
+
+
+
+
+
+
 // $(document).ready(function() {
 //   $('#submit').click(function() {
 //     // const symptoms = $("#userSymptoms").val();
@@ -42,5 +46,5 @@ let ImageSwitch = new Array();
         // $('.constellationInfo').html( `${}`);
 //         // $('.showErrors').text(`There was an error processing your request: ${error.message}`);
 //     })
-//   });
-// });
+  })
+});
