@@ -2,9 +2,8 @@ import $  from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
-import { SkyMap } from './skyMapCalls';
+import { SkyMap } from './js/skyMapCalls';
 import { LatLongConverter } from './js/LatLongConverter';
-import {ConstellationDetails} from './Constellationinfo';
 let cities = require('cities');
 import { populateCityDropDown } from './js/cityDropDown';
 import {CelestialCoordinates, AltAzCoordinates, XYCoordinates} from './js/coordinates.js';
@@ -22,13 +21,6 @@ const constellations = require('./data/constellations.json');
 
    const convert = convertConstellations(constellations.Constellations,0.139805556,29.09055556,120,0,800,800);
    draw(fovConstellations(convert,800,800));
-
-   $('.nav-link[name=constellations]').click(function() {
-      let constellationWiki = new ConstellationDetails();
-      console.log(constellationWiki);
-      $("#toShow").showConstellations();
-
-  });
 
   $('#searchLocation').on('input', function(){
     filterCities($('#searchCities').val().trim().toLowerCase());
