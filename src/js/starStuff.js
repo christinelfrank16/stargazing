@@ -3,7 +3,8 @@ import {
 } from './coordinates.js';
 
 export class Star {
-  constructor(name, constellation, ra, dec, ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight) {
+  constructor(id, name, constellation, ra, dec, ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight) {
+    this.id = id;
     this.name = name;
     this.constellation = constellation;
     this.celestial = new CelestialCoordinates(ra, dec);
@@ -15,7 +16,7 @@ export class Star {
 }
 
 export class Constellation {
-  constructor(name, ra, dec,ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight, list) {
+  constructor(name, ra, dec,ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight) {
     this.name = name;
     this.stars = [];
     this.ra = ra;
@@ -24,7 +25,7 @@ export class Constellation {
     this.xy = this.cellestial.coverttoXYfromCelestial(ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight);
     this.x = this.xy.x;
     this.y = this.xy.y;
-    this.list = list;
+    this.completed = false;
   }
 }
 
@@ -46,19 +47,31 @@ export function convertConstellations(constellationObjs, ceterRa, centerDec, fov
   let convertedConstellations = [];
 
   constellationObjs.forEach(function(constellation) {
-    let constObj = new Constellation(constellation.Name, constellation.RAh, constellation.DEd,ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight, constellation.lines);
+    let constObj = new Constellation(constellation.Name, constellation.RAh, constellation.DEd,ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight);
 
     constellation.stars.forEach(function(star) {
-      let starObj = new Star(star.starName, constellation.Name, star.RAh, star.DEd, ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight);
+      let starObj = new Star(star.id, star.starName, constellation.Name, star.RAh, star.DEd, ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight);
       constObj.stars.push(starObj);
-      constObj.list.forEach(function(linePoints){
-        if(linePoints[0] === star.id){
-          linePoints[0] = [starObj.x, starObj.y];
-        } else if (linePoints[1] === star.id){
-          linePoints[1] = [starObj.x, starObj.y];
-        }
-      });
     });
+
+    let points = [];
+    constellation.lines.forEach(function(linePoints){
+      let lineObj = {};
+      for(let i = 0; i < constellation.stars.length; i++){
+        let star = constObj.stars[i];
+        if(linePoints[0] == star.id){
+          lineObj[star.id] = [star.x, star.y];
+        } else if (linePoints[1] == star.id){
+          lineObj[star.id] = [star.x, star.y];
+        }
+        if(Object.keys(lineObj).length === 2){
+          points.push(lineObj);
+          break;
+        }
+      }
+    });
+    constObj.lines = points;
+
     convertedConstellations.push(constObj);
   });
   return convertedConstellations;
@@ -85,12 +98,34 @@ export function fovConstellations(convertedConstellations, screenWidth, screenHe
 }
 
 
-export function getClickedPosition(cvs,event) {
+export function getClickedPosition(cvs, event, fovConsts) {
   let border = cvs.getBoundingClientRect();
   let cordX = event.clientX - border.left;
   let cordY = event.clientY - border.top;
   console.log(cordX,cordY);
-    // if(cordX && cordY === )
+
+  fovConsts.forEach(function(constellation){
+    if(constellation.completed === false){
+      constellation.stars.forEach(function(star){
+        if((Math.abs(star.x - cordX) < 3) && (Math.abs(star.y - cordY) < 3)){
+          star.clicked = true;
+        }
+      });
+      let constComplete = true;
+      constellation.stars.forEach(function(star){
+        if(!star.clicked){
+          constComplete = false;
+        }
+      });
+
+      constellation.complete = constComplete;
+
+      constellation.list.forEach(function(points){
+
+      });
+    }
+  });
+
 
 
 }

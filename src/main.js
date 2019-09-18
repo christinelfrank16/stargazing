@@ -20,7 +20,8 @@ const constellations = require('./data/constellations.json');
    buildDropDown("");
 
    const convert = convertConstellations(constellations.Constellations,0.139805556,29.09055556,120,0,800,800);
-   draw(fovConstellations(convert,800,800));
+   let fovConsts = fovConstellations(convert,800,800);
+   draw(fovConsts);
 
   $('#searchLocation').on('input', function(){
     filterCities($('#searchCities').val().trim().toLowerCase());
@@ -38,7 +39,6 @@ const constellations = require('./data/constellations.json');
     const lat = parseFloat(cityLatLong.substring(0, cityLatLong.indexOf(',')));
     const long = parseFloat(cityLatLong.substring(cityLatLong.indexOf(',')+1));
     converter = new LatLongConverter(lat, long);
-    console.log(converter);
     $('#citiesDropDown').text($(this)[0].innerHTML);
     $('#citiesDropDown').dropdown('toggle');
   });
