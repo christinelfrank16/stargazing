@@ -1,18 +1,17 @@
 export class LatLongConverter {
   constructor(lat, long) {
     //latitude
-    this.latitude = lat;
+    this.latitude = lat; // degrees
     //longitude
-    this.longitude = long;
+    this.longitude = long; // degrees
 
     //assume looking straight up in sky
-    this.declination = lat;
-    debugger
+    this.declination = lat; // hours
+    
     const julDay = this.convertJulianDay();
-    const theta = this.calcSideReel(julDay, long);
-    const tau = this.calcTau(lat);
+    const last = this.calcLAST(julDay, long);
 
-    this.rightAscention = this.calcRa(tau, theta);
+    this.rightAscention = last;
   }
 
   convertJulianDay(){
@@ -30,19 +29,18 @@ export class LatLongConverter {
 
     const julianDate = julianDayNum + (hour/24) + (min/1440) + (sec/86400);
 
-    return [julianDate, hour];
+    return julianDate;
   }
 
   // reference: http://www.geoastro.de/elevaz/basics/index.htm
+  // reference: https://aa.usno.navy.mil/faq/docs/GAST.php
 
-  calcSideReel(julianDateArray, longitude){
-    const julianDate = julianDateArray[0];
-    const utcHour = julianDateArray[1];
+  calcSideReel(julianDate){ // GMST
     const midnight = Math.floor(julianDate) +0.5;
     const daysSinceMid = julianDate - midnight;
     const hrsSinceMid = daysSinceMid * 24;
 
-    const equinox = 2451545 // JD at vernal equinox
+    const equinox = 2451545; // JD at vernal equinox
     const wholeDaysSinceEq = midnight - equinox;
     const centuriesSinceEq = (julianDate - equinox)/36525;
 
@@ -50,33 +48,43 @@ export class LatLongConverter {
      + (1.00273790935 * hrsSinceMid)
      + (0.000026 * centuriesSinceEq*centuriesSinceEq);
 
-     if(longitude < 0){
-       longitude += 360;
-     } else if (longitude > 360){
-       longitude -= 360;
-     }
-
-    return ((time%24)*15 + longitude) % 360; // convert to degrees then add local location
+    return (time%24); // result in hours, reduce to range 0-24
   }
 
-  calcEclipLong(julianDateArray){
-    const equinox = 2451545;
-    const julianDate = julianDateArray[0];
-    const julianCenturiesSinceEq = (julianDate-equinox)/36525;
+  calcLAST(julianDate, longitude){
+    const equinox = 2451545; // JD at vernal equinox
+    const daysSinceEq = julianDate - equinox;
+    const omega = this.calcLongAscendMoon(daysSinceEq);
+    const sunLong = this.calcMeanLongSun(daysSinceEq);
+    const nuation = (-0.000319*Math.sin(omega)) - (0.000024*Math.sin(sunLong)); // result in hours
+    const obliquity = this.calcObliquity(daysSinceEq);
+    const eqEquinoxes = nuation*Math.cos(obliquity);
 
-    const eps = 23.0 + (26.0/60.0) + (21.448/3600.0) - (46.8150*julianCenturiesSinceEq + 0.00059*julianCenturiesSinceEq*julianCenturiesSinceEq - 0.001813*julianCenturiesSinceEq*julianCenturiesSinceEq*julianCenturiesSinceEq)/3600;
+    const gast = this.calcSideReel(julianDate)+eqEquinoxes; // result in hours
 
-  }
-  // hour angle
-  // corresponds to the length of sidereal time elapsed since the body St last made a transit of the meridian
-  // assume delta declination = 0 (no rotation from celestial equator)
-  // assume altitude = 90 (straight up)
-  calcTau(latitude, longitude){
-    (1-Math.sin(latitude)*Math.sin(90))/(Math.cos(latitude))
-    // return Math.acos(1/Math.cos(latitude));
+    if(longitude < 0){
+      longitude+= 360;
+    } else if (longitude > 360){
+      longitude -= 360;
+    }
+    const longInHrs = longitude/15; // 15 deg per hr
+    const last = gast + longInHrs;
+    return (last%24); // result in hours, reduce to range 0-24
   }
 
-  calcRa(tau, theta){
-    return theta - tau;
+  calcLongAscendMoon(daysSinceEq){
+    const omega = 1250.04 - (0.0552954*daysSinceEq);
+    return omega; // result in degrees
   }
+
+  calcMeanLongSun(daysSinceEq){
+    const sunLong = 280.47 + (0.98565*daysSinceEq);
+    return sunLong; // result in degrees
+  }
+
+  calcObliquity(daysSinceEq){
+    const obliquity = 23.4393 - (0.0000004 * daysSinceEq);
+    return obliquity; // result in degrees
+  }
+
 }
