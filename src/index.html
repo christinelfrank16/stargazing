@@ -31,10 +31,19 @@
             </div>
           </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-          </form>
+          <div id="cities" class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="citiesDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Select Your City
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+              <form id="searchLocation" class="px-4 py-2">
+                <input type="search" class="form-control" id="searchCities" placeholder="Search" autofocus="autofocus">
+              </form>
+              <button id="empty" class="dropdown-item" type="button">Enter state initials or zipcode</button>
+              <div id="cityItems">
+              </div>
+            </div>
+          </div>
         </div>
     </nav>
     <div class="jumbotron">
