@@ -1,3 +1,4 @@
+
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -19,7 +20,7 @@ module.exports = {
     new CleanWebpackPlugin(['dist']),
     new Dotenv(),
     new HtmlWebpackPlugin({
-      title: 'doc-search',
+      title: 'stargazing',
       template: './src/index.html',
       inject: 'body'
     })
@@ -53,5 +54,6 @@ module.exports = {
       }
     }
    ]
- }
+  }
+
 };
