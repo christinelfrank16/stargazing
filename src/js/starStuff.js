@@ -15,7 +15,7 @@ export class Star {
 }
 
 export class Constellation {
-  constructor(name, ra, dec,ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight) {
+  constructor(name, ra, dec,ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight, list) {
     this.name = name;
     this.stars = [];
     this.ra = ra;
@@ -24,6 +24,7 @@ export class Constellation {
     this.xy = this.cellestial.coverttoXYfromCelestial(ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight);
     this.x = this.xy.x;
     this.y = this.xy.y;
+    this.list = list;
   }
 }
 
@@ -45,11 +46,18 @@ export function convertConstellations(constellationObjs, ceterRa, centerDec, fov
   let convertedConstellations = [];
 
   constellationObjs.forEach(function(constellation) {
-    let constObj = new Constellation(constellation.Name, constellation.RAh, constellation.DEd,ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight);
+    let constObj = new Constellation(constellation.Name, constellation.RAh, constellation.DEd,ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight, constellation.lines);
 
     constellation.stars.forEach(function(star) {
       let starObj = new Star(star.starName, constellation.Name, star.RAh, star.DEd, ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight);
       constObj.stars.push(starObj);
+      constObj.list.forEach(function(linePoints){
+        if(linePoints[0] === star.id){
+          linePoints[0] = [starObj.x, starObj.y];
+        } else if (linePoints[1] === star.id){
+          linePoints[1] = [starObj.x, starObj.y];
+        }
+      });
     });
     convertedConstellations.push(constObj);
   });
