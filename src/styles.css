@@ -28,9 +28,26 @@ h3,h2 {
 .row {
   font-weight: lighter;
   margin-top: 30px;
-
 }
 #toShow {
   display:none;
 }
 
+#citiesDropDown {
+  background-color: black;
+  border-color: grey;
+}
+
+#cities .dropdown-menu {
+  background-color: #555555;
+}
+#cities .dropdown-item {
+  color: white;
+}
+#cities .dropdown-item:hover {
+  background-color: #A2A2A2;
+}
+#cityItems {
+  max-height: 20rem;
+  overflow-y: auto;
+}

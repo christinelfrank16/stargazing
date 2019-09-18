@@ -14,7 +14,6 @@ module.exports = {
   devServer: {
     contentBase: './dist'
   },
-
   plugins: [
     new UglifyJsPlugin({ sourceMap: true }),
     new CleanWebpackPlugin(['dist']),
