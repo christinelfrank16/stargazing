@@ -1,0 +1,34 @@
+body {
+  color: grey;
+  background-color: black;
+}
+
+.jumbotron {
+  background-image: url("https://www.filepicker.io/api/file/Ko1bvEHySETdxMJHqCgJ");
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  font-family: Bangers;
+  font-size: 72pt;
+  font-stretch: expanded;
+
+}
+.container {
+  text-align: center;
+}
+
+.column {
+  margin: 50px;
+
+}
+h3,h2 {
+  font-weight: lighter;
+}
+.row {
+  font-weight: lighter;
+  margin-top: 30px;
+
+}
+#toShow {
+  display:none;
+}
