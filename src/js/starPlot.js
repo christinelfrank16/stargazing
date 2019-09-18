@@ -15,12 +15,23 @@ export function plotConstellation(constellationObj, centerRa, centerDec, fov, di
   const coordinateObj = createCoordinate(constellationObj, centerRa, centerDec, fov, displayRotation, screenWidth, screenHeight);
 
   coordinateObj.stars.forEach(function(star) {
-    var canvas = document.getElementById("myCanvas");
-    var ctx = canvas.getContext("2d");
-    ctx.strokeStyle = "#7DFAF2";
-    ctx.beginPath();
-    ctx.arc(star.xy.x, star.xy.y, 30, 0, 2 * Math.PI);
-    ctx.stroke();
+    plotStar(star);
   });
   return true;
+}
+
+export function plotStar(star) {
+  const calcStar =
+  const canvas = document.getElementById("myCanvas");
+  const ctx = canvas.getContext("2d");
+  ctx.strokeStyle = "#faef8e";
+  ctx.beginPath();
+  ctx.strokeRect(star.xy.x, star.xy.y, 5, 5);
+  ctx.stroke();
+}
+
+export function plotStars(starArray){
+  starArray.forEach(function(star){
+    plotStar(star);
+  });
 }
