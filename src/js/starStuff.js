@@ -13,7 +13,7 @@ export class Star {
 }
 
 export class Constellation {
-  constructor(name, ra, dec) {
+  constructor(name, ra, dec,ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight) {
     this.name = name;
     this.stars = [];
     this.ra = ra;
