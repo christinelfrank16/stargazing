@@ -7,8 +7,7 @@ import { LatLongConverter } from './js/LatLongConverter';
 let cities = require('cities');
 import { populateCityDropDown } from './js/cityDropDown';
 import {CelestialCoordinates, AltAzCoordinates, XYCoordinates} from './js/coordinates.js';
-import {draw} from './js/game.js';
-import{Star, Constellation, generateRandomStars, convertConstellations,fovConstellations} from './js/starStuff.js'
+import{Star, Constellation, generateRandomStars, convertConstellations,fovConstellations, getClickedPosition} from './js/starStuff.js'
 const constellations = require('./data/constellations.json');
 
  $(document).ready(function() {
@@ -16,12 +15,26 @@ const constellations = require('./data/constellations.json');
    let convertedConstellation;
    let localConstalltion;
 
+   var cvs = document.getElementById("gameCanvas");
+   var ctx = cvs.getContext("2d");
+   var canvasWidth = document.getElementById("gameCanvas").width;
+   var canvasHeight = document.getElementById("gameCanvas").height;
+   const convert = convertConstellations(constellations.Constellations,0.139805556,29.09055556,120,0,800,800);
+   let fovConsts = fovConstellations(convert,800,800);
+   console.log(fovConsts);
+   var colorArray = ['#faef8e'];
+   var starsArray = generateRandomStars(500, canvasWidth, canvasHeight, colorArray);
+
+   cvs.addEventListener("click", function(event){
+     getClickedPosition(cvs,event, fovConsts);
+     draw(fovConsts, starsArray, ctx);
+   });
+
    let converter = new LatLongConverter(45.5051, -122.6750); // default to portland, OR
    buildDropDown("");
 
-   const convert = convertConstellations(constellations.Constellations,0.139805556,29.09055556,120,0,800,800);
-   let fovConsts = fovConstellations(convert,800,800);
-   draw(fovConsts);
+
+   draw(fovConsts, starsArray, ctx);
 
   $('#searchLocation').on('input', function(){
     filterCities($('#searchCities').val().trim().toLowerCase());
@@ -69,6 +82,57 @@ const constellations = require('./data/constellations.json');
   // });
 
 });
+
+
+function draw(localConstalltions, starsArray, ctx) {
+
+
+  //if you need to draw some image (the 0,0 starts top left)
+  // ctx.drawImage(imgName,x,y);
+
+
+  //draw all constellation stars
+  localConstalltions.forEach(function(constellation) {
+    constellation.stars.forEach(function(star){
+      ctx.strokeStyle = "#33FFF6";
+      ctx.beginPath();
+      ctx.strokeRect(star.x, star.y, 2, 2);
+      ctx.stroke();
+    });
+  });
+  //draw all random stars
+  starsArray.forEach(function(star) {
+    ctx.strokeStyle = "#faef8e";
+    ctx.beginPath();
+    ctx.strokeRect(star.x, star.y, 2, 2);
+    ctx.stroke();
+  });
+
+  //code to draw your lines (greyed out), if you click and mouse over 2 points that are correct, then you can have a green line for success
+  localConstalltions.forEach(function(constellation){
+    constellation.lines.forEach(function(points){
+      const ids = Object.keys(points);
+      const id1 = ids[0];
+      const id2 = ids[1];
+      let pointsChecked = true;
+      for(let i = 0; i < constellation.stars.length; i++){
+        let star = constellation.stars[i];
+        if(star.id == id1 || star.id == id2){
+          if(!star.clicked){
+            pointsChecked = false;
+          }
+        }
+      }
+      if(pointsChecked){
+        ctx.strokeStyle = "#ff0000";
+        ctx.beginPath();
+        ctx.moveTo(points[id1][0],points[id1][1]);
+        ctx.lineTo(points[id2][0],points[id2][1])
+        ctx.stroke();
+      }
+    });
+  });
+}
 
 
 function buildDropDown(input){
