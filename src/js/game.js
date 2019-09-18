@@ -1,8 +1,14 @@
-import { Star, generateRandomStars } from './starStuff.js';
+import { Star, generateRandomStars, getClickedPosition } from './starStuff.js';
 var cvs = document.getElementById("gameCanvas");
 var ctx = cvs.getContext("2d");
 var canvasWidth = document.getElementById("gameCanvas").width;
 var canvasHeight = document.getElementById("gameCanvas").height;
+
+cvs.addEventListener("click", function(event){
+  getClickedPosition(cvs,event);
+})
+
+
 
 //imgs
 var star = new Image();
@@ -12,8 +18,8 @@ var correct = new Audio();
 
 //randomly generate stars
 var colorArray = ['#faef8e'];
-var starsArray = generateRandomStars(100, canvasWidth, canvasHeight, colorArray);
-console.log('starsArray',starsArray);
+var starsArray = generateRandomStars(500, canvasWidth, canvasHeight, colorArray);
+
 
 //separate starsArray of general stars (just coordinates) and constellation objecfts
 
@@ -25,14 +31,23 @@ console.log('starsArray',starsArray);
 
 
 //draw function
-export function draw() {
+export function draw(localConstalltion) {
+
 
   //if you need to draw some image (the 0,0 starts top left)
   // ctx.drawImage(imgName,x,y);
 
 
-
-  //draw all stars
+  //draw all constellation stars
+  localConstalltion.forEach(function(constellation) {
+    constellation.stars.forEach(function(star){
+      ctx.strokeStyle = "#33FFF6";
+      ctx.beginPath();
+      ctx.strokeRect(star.x, star.y, 2, 2);
+      ctx.stroke();
+    });
+  });
+  //draw all random stars
   starsArray.forEach(function(star) {
     ctx.strokeStyle = "#faef8e";
     ctx.beginPath();

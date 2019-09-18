@@ -75,3 +75,24 @@ export function fovConstellations(convertedConstellations, screenWidth, screenHe
   });
   return checkedConstellations;
 }
+
+
+export function getClickedPosition(cvs,event) {
+  let border = cvs.getBoundingClientRect();
+  let cordX = event.clientX - border.left;
+  let cordY = event.clientY - border.top;
+  console.log(cordX,cordY);
+    // if(cordX && cordY === )
+
+
+}
+
+// export function gameWon(){
+//   let allCorrect = localConstalltion;
+//     if(allCorrect === correctStar);{
+//       return true;
+//     } else{
+//       return false;
+//     }
+//
+// }
