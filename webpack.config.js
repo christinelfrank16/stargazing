@@ -51,7 +51,11 @@ module.exports = {
         options: {
           presets: ['es2015']
       }
-    }
+    },
+    {
+      test: /\.(ogg|mp3|wav|m4a)$/,
+      loader: 'url-loader'
+  }
    ]
   }
 

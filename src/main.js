@@ -26,19 +26,21 @@ import {
   getClickedPosition
 } from './js/starStuff.js'
 const constellations = require('./data/constellations.json');
+let gamePlayMusicI= require('./audio/constellationGamePlayMusic.m4a');
 
 $(document).ready(function() {
 
-   let localConstalltion;
+  let localConstalltion;
 
-   var cvs = document.getElementById("gameCanvas");
-   var ctx = cvs.getContext("2d");
-   var canvasWidth = document.getElementById("gameCanvas").width;
-   var canvasHeight = document.getElementById("gameCanvas").height;
-   var difficulty;
-   let convert = convertConstellations(constellations.Constellations,0.139805556,29.09055556,120,0,800,800);
-   let fovConsts = fovConstellations(convert,800,800);
+  var cvs = document.getElementById("gameCanvas");
+  var ctx = cvs.getContext("2d");
+  var canvasWidth = document.getElementById("gameCanvas").width;
+  var canvasHeight = document.getElementById("gameCanvas").height;
+  var difficulty;
+  let convert = convertConstellations(constellations.Constellations, 0.139805556, 29.09055556, 120, 0, 800, 800);
+  let fovConsts = fovConstellations(convert, 800, 800);
 
+  var gamePlayMusic = new Audio(gamePlayMusicI);
   var randomColorArray = ['#ffedb2', '#fffe9f', '#ffbf87', '#ff9867'];
   var constellationColorArrayMedium = ['#ffedb2', '#fffe9f', '#40E0D0', '#9ee6cf'];
   var constellationColorArrayHard = ['#ffedb2', '#fffe9f', '#ffbf87', '#9ee6cf'];
@@ -49,16 +51,18 @@ $(document).ready(function() {
   });
 
   //difficulty setting
-  $('[aria-labelledby=dropdownMenu1]').click(function(event){
+  $('[aria-labelledby=dropdownMenu1]').click(function(event) {
     event.preventDefault();
     difficulty = event.target.value;
     $('.difficulty .dropdown-toggle').text(event.target.innerHTML);
-    draw(fovConsts, starsArray, ctx, difficultyColors(difficulty),randomColorArray);
+    draw(fovConsts, starsArray, ctx, difficultyColors(difficulty), randomColorArray);
   });
 
   //begin button
-  $('button[name=startGame]').click(function(){
-    draw(fovConsts, starsArray, ctx, difficultyColors(difficulty),randomColorArray);
+  $('button[name=startGame]').click(function() {
+    gamePlayMusic.play();
+    // $('body').append('<audio autoPlay src={gamePlayMusicI}></audio>');
+    draw(fovConsts, starsArray, ctx, difficultyColors(difficulty), randomColorArray);
     $('.intro').hide();
     $('.game').show();
     $('button[name=startGame]').hide();
@@ -84,10 +88,10 @@ $(document).ready(function() {
     const lat = parseFloat(cityLatLong.substring(0, cityLatLong.indexOf(',')));
     const long = parseFloat(cityLatLong.substring(cityLatLong.indexOf(',') + 1));
     converter = new LatLongConverter(lat, long);
-    convert = convertConstellations(constellations.Constellations,converter.rightAscention/15,converter.declination,120,0,800,800);
-    fovConsts = fovConstellations(convert,800,800);
-    $('.game h1').text('Location: '+ this.innerHTML);
-    draw(fovConsts, starsArray, ctx, difficultyColors(difficulty),randomColorArray);
+    convert = convertConstellations(constellations.Constellations, converter.rightAscention / 15, converter.declination, 120, 0, 800, 800);
+    fovConsts = fovConstellations(convert, 800, 800);
+    $('.game h1').text('Location: ' + this.innerHTML);
+    draw(fovConsts, starsArray, ctx, difficultyColors(difficulty), randomColorArray);
     $('#citiesDropDown').text($(this)[0].innerHTML);
     $('#citiesDropDown').dropdown('toggle');
   });
@@ -150,8 +154,8 @@ function draw(localConstalltions, starsArray, ctx, constellationColorArray, rand
           ctx.moveTo(points[id1][0], points[id1][1]);
           ctx.lineTo(points[id2][0], points[id2][1]);
           ctx.font = "15px Arial";
-          constellationNameAlign(constellation,ctx,800);
-          ctx.fillStyle="#1fad9f";
+          constellationNameAlign(constellation, ctx, 800);
+          ctx.fillStyle = "#1fad9f";
           ctx.fillText(constellation.name, constellation.x, constellation.y);
           ctx.stroke();
         } else {
@@ -199,20 +203,20 @@ function filterCities(word) {
   }
 }
 
-function constellationNameAlign(constellation, ctx, screenWidth){
-  if(constellation.x > screenWidth/2){
+function constellationNameAlign(constellation, ctx, screenWidth) {
+  if (constellation.x > screenWidth / 2) {
     return ctx.textAlign = 'right';
   }
 }
 
-function difficultyColors(difficultyChosen){
-  if(difficultyChosen=== "medium"){
+function difficultyColors(difficultyChosen) {
+  if (difficultyChosen === "medium") {
     return ['#ffedb2', '#fffe9f', '#40E0D0', '#9ee6cf'];
-  }else if (difficultyChosen=== "hard"){
+  } else if (difficultyChosen === "hard") {
     return ['#ffedb2', '#fffe9f', '#ffbf87', '#9ee6cf'];
-  }else if (difficultyChosen=== "easy"){
-    return ['#9ee6cf','#40E0D0','#99f0ca','#c9fdd7'];
-  }else{
+  } else if (difficultyChosen === "easy") {
+    return ['#9ee6cf', '#40E0D0', '#99f0ca', '#c9fdd7'];
+  } else {
     return ['#ffedb2', '#fffe9f', '#ffbf87', '#ff9867'];
   }
 }
