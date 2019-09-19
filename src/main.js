@@ -22,19 +22,21 @@ const constellations = require('./data/constellations.json');
    const convert = convertConstellations(constellations.Constellations,0.139805556,29.09055556,120,0,800,800);
    let fovConsts = fovConstellations(convert,800,800);
    console.log(fovConsts);
-   var colorArray = ['#faef8e'];
-   var starsArray = generateRandomStars(500, canvasWidth, canvasHeight, colorArray);
+
+   var randomColorArray = ['#ffedb2','#fffe9f','#ffbf87','#ff9867'];
+   var constellationColorArray = ['#ffedb2','#fffe9f','#ffbf87','#9ee6cf'];
+   var starsArray = generateRandomStars(500, canvasWidth, canvasHeight, randomColorArray);
 
    cvs.addEventListener("click", function(event){
      getClickedPosition(cvs,event, fovConsts);
-     draw(fovConsts, starsArray, ctx);
+     // draw(fovConsts, starsArray, ctx);
    });
 
    let converter = new LatLongConverter(45.5051, -122.6750); // default to portland, OR
    buildDropDown("");
 
 
-   draw(fovConsts, starsArray, ctx);
+   draw(fovConsts, starsArray, ctx, constellationColorArray,randomColorArray);
 
   $('#searchLocation').on('input', function(){
     filterCities($('#searchCities').val().trim().toLowerCase());
@@ -84,7 +86,7 @@ const constellations = require('./data/constellations.json');
 });
 
 
-function draw(localConstalltions, starsArray, ctx) {
+function draw(localConstalltions, starsArray, ctx, constellationColorArray, randomColorArray) {
 
 
   //if you need to draw some image (the 0,0 starts top left)
@@ -94,15 +96,22 @@ function draw(localConstalltions, starsArray, ctx) {
   //draw all constellation stars
   localConstalltions.forEach(function(constellation) {
     constellation.stars.forEach(function(star){
-      ctx.strokeStyle = "#33FFF6";
-      ctx.beginPath();
-      ctx.strokeRect(star.x, star.y, 2, 2);
-      ctx.stroke();
+      if(star.clicked){
+        ctx.strokeStyle = '#9ee6cf';
+        ctx.beginPath();
+        ctx.strokeRect(star.x, star.y, 2, 2);
+        ctx.stroke();
+      } else{
+        ctx.strokeStyle = constellationColorArray[Math.floor(Math.random()*constellationColorArray.length)];
+        ctx.beginPath();
+        ctx.strokeRect(star.x, star.y, 2, 2);
+        ctx.stroke();
+      }
     });
   });
   //draw all random stars
   starsArray.forEach(function(star) {
-    ctx.strokeStyle = "#faef8e";
+    ctx.strokeStyle = randomColorArray[Math.floor(Math.random()*randomColorArray.length)];
     ctx.beginPath();
     ctx.strokeRect(star.x, star.y, 2, 2);
     ctx.stroke();
@@ -124,13 +133,26 @@ function draw(localConstalltions, starsArray, ctx) {
         }
       }
       if(pointsChecked){
-        ctx.strokeStyle = "#ff0000";
-        ctx.beginPath();
-        ctx.moveTo(points[id1][0],points[id1][1]);
-        ctx.lineTo(points[id2][0],points[id2][1])
-        ctx.stroke();
+        if(constellation.completed){
+          ctx.strokeStyle = "#1fad9f";
+          ctx.beginPath();
+          ctx.moveTo(points[id1][0],points[id1][1]);
+          ctx.lineTo(points[id2][0],points[id2][1])
+          ctx.stroke();
+        }else{
+          ctx.strokeStyle = "#ff0000";
+          ctx.beginPath();
+          ctx.moveTo(points[id1][0],points[id1][1]);
+          ctx.lineTo(points[id2][0],points[id2][1])
+          ctx.stroke();
+
+        }
       }
     });
+  });
+
+  window.requestAnimationFrame(function(){
+    draw(localConstalltions, starsArray, ctx, constellationColorArray, randomColorArray);
   });
 }
 

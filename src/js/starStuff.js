@@ -105,12 +105,7 @@ export function getClickedPosition(cvs, event, fovConsts) {
 
   fovConsts.forEach(function(constellation){
     if(constellation.completed === false){
-      // console.log("const not completed");
       constellation.stars.forEach(function(star){
-        // console.log(star.name, Math.abs(star.x - cordX), Math.abs(star.y - cordY));
-        // console.log("star coords", star.x, star.y);
-        console.log("click coords", cordX,cordY);
-
         if((Math.abs(star.x - cordX) < 10) && (Math.abs(star.y - cordY) < 10)){
           console.log("clicked star!", star.name);
           star.clicked = true;
@@ -122,8 +117,8 @@ export function getClickedPosition(cvs, event, fovConsts) {
           constComplete = false;
         }
       });
-
-      constellation.complete = constComplete;
+      console.log(fovConsts);
+      constellation.completed = constComplete;
     }
   });
 
