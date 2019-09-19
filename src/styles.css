@@ -3,6 +3,10 @@ body {
   background-color: black;
 }
 
+#gameCanvas, #tutorialCanvas {
+  display: none;
+}
+
 .jumbotron {
   background-image: url("https://www.filepicker.io/api/file/Ko1bvEHySETdxMJHqCgJ");
   text-align: center;
@@ -11,26 +15,46 @@ body {
   font-family: Bangers;
   font-size: 72pt;
   font-stretch: expanded;
-
 }
+.game{
+  max-width: 810px;
+  margin: auto;
+}
+
 .container {
   text-align: center;
 }
 
 .column {
   margin: 50px;
-
 }
 
-h3,h2 {
+h3, h2 {
   font-weight: lighter;
 }
+
 .row {
   font-weight: lighter;
   margin-top: 30px;
 }
+
+.dropdown-toggle{
+  background-color: black;
+  border-color: grey;
+}
+.dropdown-menu {
+  background-color: #555555;
+}
+
+.dropdown-item{
+  color: white;
+}
+.dropdown-item:hover {
+  background-color: #A2A2A2;
+}
+
 #toShow {
-  display:none;
+  display: none;
 }
 
 #citiesDropDown {
@@ -38,15 +62,18 @@ h3,h2 {
   border-color: grey;
 }
 
-#cities .dropdown-menu {
+/* #cities .dropdown-menu {
   background-color: #555555;
 }
+
 #cities .dropdown-item {
   color: white;
 }
+
 #cities .dropdown-item:hover {
   background-color: #A2A2A2;
-}
+} */
+
 #cityItems {
   max-height: 20rem;
   overflow-y: auto;

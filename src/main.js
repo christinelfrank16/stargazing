@@ -35,23 +35,36 @@ $(document).ready(function() {
    var ctx = cvs.getContext("2d");
    var canvasWidth = document.getElementById("gameCanvas").width;
    var canvasHeight = document.getElementById("gameCanvas").height;
+   var difficulty;
    let convert = convertConstellations(constellations.Constellations,0.139805556,29.09055556,120,0,800,800);
    let fovConsts = fovConstellations(convert,800,800);
 
   var randomColorArray = ['#ffedb2', '#fffe9f', '#ffbf87', '#ff9867'];
-  var constellationColorArray = ['#ffedb2', '#fffe9f', '#40E0D0', '#9ee6cf'];
+  var constellationColorArrayMedium = ['#ffedb2', '#fffe9f', '#40E0D0', '#9ee6cf'];
+  var constellationColorArrayHard = ['#ffedb2', '#fffe9f', '#ffbf87', '#9ee6cf'];
   var starsArray = generateRandomStars(500, canvasWidth, canvasHeight, randomColorArray);
 
   cvs.addEventListener("click", function(event) {
     getClickedPosition(cvs, event, fovConsts);
-    // draw(fovConsts, starsArray, ctx);
   });
+
+  //difficulty setting
+  $('[aria-labelledby=dropdownMenu1]').click(function(event){
+    event.preventDefault();
+    difficulty = event.target.value;
+    draw(fovConsts, starsArray, ctx, difficultyColors(difficulty),randomColorArray);
+  });
+
+  //begin button
+  $('button[name=startGame]').click(function(){
+    draw(fovConsts, starsArray, ctx, difficultyColors(difficulty),randomColorArray);
+    $('#gameCanvas').show();
+    $('button[name=startGame]').hide();
+  });
+
 
   let converter = new LatLongConverter(45.5051, -122.6750); // default to portland, OR
   buildDropDown("");
-
-
-  draw(fovConsts, starsArray, ctx, constellationColorArray, randomColorArray);
 
   $('#searchLocation').on('input', function() {
     filterCities($('#searchCities').val().trim().toLowerCase());
@@ -71,7 +84,7 @@ $(document).ready(function() {
     converter = new LatLongConverter(lat, long);
     convert = convertConstellations(constellations.Constellations,converter.rightAscention/15,converter.declination,120,0,800,800);
     fovConsts = fovConstellations(convert,800,800);
-    draw(fovConsts, starsArray, ctx, constellationColorArray,randomColorArray);
+    draw(fovConsts, starsArray, ctx, difficultyColors(difficulty),randomColorArray);
     $('#citiesDropDown').text($(this)[0].innerHTML);
     $('#citiesDropDown').dropdown('toggle');
   });
@@ -133,7 +146,8 @@ function draw(localConstalltions, starsArray, ctx, constellationColorArray, rand
           ctx.beginPath();
           ctx.moveTo(points[id1][0], points[id1][1]);
           ctx.lineTo(points[id2][0], points[id2][1]);
-          ctx.font = "30px Arial";
+          ctx.font = "15px Arial";
+          constellationNameAlign(constellation,ctx,800);
           ctx.fillStyle="#1fad9f";
           ctx.fillText(constellation.name, constellation.x, constellation.y);
           ctx.stroke();
@@ -179,5 +193,23 @@ function filterCities(word) {
     $('#empty').show();
   } else {
     $('#empty').hide();
+  }
+}
+
+function constellationNameAlign(constellation, ctx, screenWidth){
+  if(constellation.x > screenWidth/2){
+    return ctx.textAlign = 'right';
+  }
+}
+
+function difficultyColors(difficultyChosen){
+  if(difficultyChosen=== "medium"){
+    return ['#ffedb2', '#fffe9f', '#40E0D0', '#9ee6cf'];
+  }else if (difficultyChosen=== "hard"){
+    return ['#ffedb2', '#fffe9f', '#ffbf87', '#9ee6cf'];
+  }else if (difficultyChosen=== "easy"){
+    return ['#9ee6cf'];
+  }else{
+    return ['#ffedb2', '#fffe9f', '#ffbf87', '#ff9867'];
   }
 }
