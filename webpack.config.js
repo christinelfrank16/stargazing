@@ -1,3 +1,4 @@
+
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -13,13 +14,12 @@ module.exports = {
   devServer: {
     contentBase: './dist'
   },
-
   plugins: [
     new UglifyJsPlugin({ sourceMap: true }),
     new CleanWebpackPlugin(['dist']),
     new Dotenv(),
     new HtmlWebpackPlugin({
-      title: 'doc-search',
+      title: 'stargazing',
       template: './src/index.html',
       inject: 'body'
     })
@@ -51,7 +51,12 @@ module.exports = {
         options: {
           presets: ['es2015']
       }
-    }
+    },
+    {
+      test: /\.(ogg|mp3|wav|m4a)$/,
+      loader: 'url-loader'
+  }
    ]
- }
+  }
+
 };
