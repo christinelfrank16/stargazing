@@ -2,6 +2,7 @@ body {
   color: grey;
   background-color: black;
   color: white;
+  text-align: center;
 }
 
 .game {
@@ -16,6 +17,10 @@ body {
   font-family: Bangers;
   font-size: 72pt;
   font-stretch: expanded;
+}
+
+.btn{
+  margin: auto;
 }
 .game{
   max-width: 810px;
