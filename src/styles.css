@@ -1,9 +1,10 @@
 body {
   color: grey;
   background-color: black;
+  color: white;
 }
 
-#gameCanvas, #tutorialCanvas {
+.game {
   display: none;
 }
 

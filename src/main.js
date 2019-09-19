@@ -58,7 +58,7 @@ $(document).ready(function() {
   //begin button
   $('button[name=startGame]').click(function(){
     draw(fovConsts, starsArray, ctx, difficultyColors(difficulty),randomColorArray);
-    $('#gameCanvas').show();
+    $('.game').show();
     $('button[name=startGame]').hide();
   });
 
@@ -77,13 +77,14 @@ $(document).ready(function() {
     $('#searchCities').val('');
   });
 
-  $('#cityItems').on('click', '.dropdown-item', function() {
+  $('#cityItems').on('click', '.dropdown-item', function(event) {
     const cityLatLong = $(this)[0].value;
     const lat = parseFloat(cityLatLong.substring(0, cityLatLong.indexOf(',')));
     const long = parseFloat(cityLatLong.substring(cityLatLong.indexOf(',') + 1));
     converter = new LatLongConverter(lat, long);
     convert = convertConstellations(constellations.Constellations,converter.rightAscention/15,converter.declination,120,0,800,800);
     fovConsts = fovConstellations(convert,800,800);
+    $('.game h1').text('Location: '+ this.innerHTML);
     draw(fovConsts, starsArray, ctx, difficultyColors(difficulty),randomColorArray);
     $('#citiesDropDown').text($(this)[0].innerHTML);
     $('#citiesDropDown').dropdown('toggle');
