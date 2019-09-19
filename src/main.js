@@ -11,9 +11,22 @@ import {  Star,  Constellation,  generateRandomStars,  convertConstellations,  f
   getClickedPosition } from './js/starStuff.js'
 import { displayFound } from './js/displayFound';
 const constellations = require('./data/constellations.json');
+// audio files
 let gamePlayMusicI= require('./audio/constellationGamePlayMusic.m4a');
+let soundButtonClickPressI= require('./audio/soundButtonClickPress.wav');
+let soundButtonClickReleaseI= require('./audio/soundButtonClickRelease.wav');
+let soundButtonDropDownHoverI= require('./audio/soundButtonDropDownHover.wav');
+let soundDropDownSoundEffectI= require('./audio/soundDropDownSoundEffect.wav');
 
 $(document).ready(function() {
+
+
+// audio files
+  var gamePlayMusic = new Audio(gamePlayMusicI);
+  var soundButtonClickPress = new Audio(soundButtonClickPressI);
+  var soundButtonClickRelease = new Audio(soundButtonClickReleaseI);
+  var soundButtonDropDownHover = new Audio(soundButtonDropDownHoverI);
+  var soundDropDownSoundEffect = new Audio(soundDropDownSoundEffectI);
 
   let localConstalltion;
 
@@ -35,8 +48,12 @@ $(document).ready(function() {
   cvs.addEventListener("click", function(event) {
     console.log(difficultyNumberStars(difficulty));
     getClickedPosition(cvs, event, fovConsts);
+<<<<<<< Updated upstream
     $('#foundConsts').html('');
     displayFound(fovConsts);
+=======
+    soundButtonClickPress.play();
+>>>>>>> Stashed changes
   });
 
   //difficulty setting
@@ -45,7 +62,12 @@ $(document).ready(function() {
     difficulty = event.target.value;
     difficultyStars = difficultyNumberStars(difficulty);
     $('.difficulty .dropdown-toggle').text(event.target.innerHTML);
+<<<<<<< Updated upstream
     draw(fovConsts, starsArray, ctx, difficultyColors(difficulty), randomColorArray, difficultyStars);
+=======
+    soundDropDownSoundEffect.play();
+    draw(fovConsts, starsArray, ctx, difficultyColors(difficulty), randomColorArray);
+>>>>>>> Stashed changes
   });
 
   //begin button
@@ -71,6 +93,7 @@ $(document).ready(function() {
   });
 
   $('#searchLocation').submit(function(event) {
+    soundButtonClickRelease.play();
     event.preventDefault();
     const searchValue = $('#searchCities').val();
     buildDropDown(searchValue);
@@ -78,6 +101,7 @@ $(document).ready(function() {
   });
 
   $('#cityItems').on('click', '.dropdown-item', function(event) {
+    soundButtonDropDownHover.play();
     const cityLatLong = $(this)[0].value;
     const lat = parseFloat(cityLatLong.substring(0, cityLatLong.indexOf(',')));
     const long = parseFloat(cityLatLong.substring(cityLatLong.indexOf(',') + 1));
