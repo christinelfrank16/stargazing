@@ -29,18 +29,23 @@ $(document).ready(function() {
   var randomColorArray = ['#ffedb2', '#fffe9f', '#ffbf87', '#ff9867'];
   var constellationColorArrayMedium = ['#ffedb2', '#fffe9f', '#40E0D0', '#9ee6cf'];
   var constellationColorArrayHard = ['#ffedb2', '#fffe9f', '#ffbf87', '#9ee6cf'];
-  var starsArray = generateRandomStars(1000, canvasWidth, canvasHeight, randomColorArray);
+  var starsArray = generateRandomStars(2000, canvasWidth, canvasHeight, randomColorArray);
+  var difficultyStars = difficultyNumberStars(difficulty);
 
   cvs.addEventListener("click", function(event) {
+    console.log(difficultyNumberStars(difficulty));
     getClickedPosition(cvs, event, fovConsts);
+    $('#foundConsts').html('');
+    displayFound(fovConsts);
   });
 
   //difficulty setting
   $('[aria-labelledby=dropdownMenu1]').click(function(event) {
     event.preventDefault();
     difficulty = event.target.value;
+    difficultyStars = difficultyNumberStars(difficulty);
     $('.difficulty .dropdown-toggle').text(event.target.innerHTML);
-    draw(fovConsts, starsArray, ctx, difficultyColors(difficulty), randomColorArray);
+    draw(fovConsts, starsArray, ctx, difficultyColors(difficulty), randomColorArray, difficultyStars);
   });
 
   //begin button
@@ -51,7 +56,7 @@ $(document).ready(function() {
 }, false);
     gamePlayMusic.play();
     // $('body').append('<audio autoPlay src={gamePlayMusicI}></audio>');
-    draw(fovConsts, starsArray, ctx, difficultyColors(difficulty), randomColorArray);
+    draw(fovConsts, starsArray, ctx, difficultyColors(difficulty), randomColorArray,difficultyStars);
     $('.intro').hide();
     $('.game').show();
     $('button[name=startGame]').hide();
@@ -80,7 +85,7 @@ $(document).ready(function() {
     convert = convertConstellations(constellations.Constellations, converter.rightAscention / 15, converter.declination, 120, 0, 800, 800);
     fovConsts = fovConstellations(convert, 800, 800);
     $('.game h1').text('Location: ' + this.innerHTML);
-    draw(fovConsts, starsArray, ctx, difficultyColors(difficulty), randomColorArray);
+    draw(fovConsts, starsArray, ctx, difficultyColors(difficulty), randomColorArray,difficultyStars);
     $('#citiesDropDown').text($(this)[0].innerHTML);
     $('#citiesDropDown').dropdown('toggle');
   });
@@ -106,10 +111,8 @@ $(document).ready(function() {
 
 
 
-function draw(localConstalltions, starsArray, ctx, constellationColorArray, randomColorArray) {
+function draw(localConstalltions, starsArray, ctx, constellationColorArray, randomColorArray, difficultyNoS) {
   ctx.clearRect(0, 0, 800, 800);
-
-
   //if you need to draw some image (the 0,0 starts top left)
   // ctx.drawImage(imgName,x,y);
 
@@ -131,12 +134,13 @@ function draw(localConstalltions, starsArray, ctx, constellationColorArray, rand
     });
   });
   //draw all random stars
-  starsArray.forEach(function(star) {
+  for(let i = 0; i<difficultyNoS; i++){
+    let star = starsArray[i];
     ctx.strokeStyle = randomColorArray[Math.floor(Math.random() * randomColorArray.length)];
     ctx.beginPath();
     ctx.strokeRect(star.x, star.y, 2, 2);
     ctx.stroke();
-  });
+  }
 
   //code to draw your lines (greyed out), if you click and mouse over 2 points that are correct, then you can have a green line for success
   localConstalltions.forEach(function(constellation) {
@@ -177,7 +181,7 @@ function draw(localConstalltions, starsArray, ctx, constellationColorArray, rand
   });
 
   window.requestAnimationFrame(function() {
-    draw(localConstalltions, starsArray, ctx, constellationColorArray, randomColorArray);
+    draw(localConstalltions, starsArray, ctx, constellationColorArray, randomColorArray, difficultyNoS);
   });
 }
 
@@ -224,5 +228,17 @@ function difficultyColors(difficultyChosen) {
     return ['#9ee6cf', '#40E0D0', '#99f0ca', '#c9fdd7'];
   } else {
     return ['#ffedb2', '#fffe9f', '#ffbf87', '#ff9867'];
+  }
+}
+
+function difficultyNumberStars(difficultyChosen){
+  if (difficultyChosen === "medium") {
+    return 500;
+  } else if (difficultyChosen === "hard") {
+    return 1000;
+  } else if (difficultyChosen === "easy") {
+    return 250;
+  } else {
+    return 2000;
   }
 }
