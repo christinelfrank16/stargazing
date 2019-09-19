@@ -2,29 +2,14 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
-import {
-  SkyMap
-} from './js/skyMapCalls';
-import {
-  LatLongConverter
-} from './js/LatLongConverter';
+import {  SkyMap} from './js/skyMapCalls';
+import {  LatLongConverter} from './js/LatLongConverter';
 let cities = require('cities');
-import {
-  populateCityDropDown
-} from './js/cityDropDown';
-import {
-  CelestialCoordinates,
-  AltAzCoordinates,
-  XYCoordinates
-} from './js/coordinates.js';
-import {
-  Star,
-  Constellation,
-  generateRandomStars,
-  convertConstellations,
-  fovConstellations,
-  getClickedPosition
-} from './js/starStuff.js'
+import {  populateCityDropDown } from './js/cityDropDown';
+import {  CelestialCoordinates,  AltAzCoordinates,  XYCoordinates } from './js/coordinates.js';
+import {  Star,  Constellation,  generateRandomStars,  convertConstellations,  fovConstellations,
+  getClickedPosition } from './js/starStuff.js'
+import { displayFound } from './js/displayFound';
 const constellations = require('./data/constellations.json');
 let gamePlayMusicI= require('./audio/constellationGamePlayMusic.m4a');
 
@@ -100,8 +85,25 @@ $(document).ready(function() {
     $('#citiesDropDown').dropdown('toggle');
   });
 
+  $('#showFoundConsts').click(function(){
+    $('#foundConstellations').width('22em');
+    $('#foundConsts').html('');
+    displayFound(fovConsts);
+    if($('.fConst').length > 0){
+      $('#noConsts').hide();
+      $('#constsFound').show();
+    } else {
+      $('#noConsts').show();
+      $('#constsFound').hide();
+    }
+  });
+
+  $('#closeFoundConsts').click(function(){
+    $('#foundConstellations').width(0);
+  });
 
 });
+
 
 
 function draw(localConstalltions, starsArray, ctx, constellationColorArray, randomColorArray) {

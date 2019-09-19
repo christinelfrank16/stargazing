@@ -69,14 +69,23 @@
     </div>
     <div class="row">
       <button type="button" name="startGame">Begin</button>
+      <div id="foundConstellations" class="sidenav">
+        <button id="closeFoundConsts" type="button" class="closebtn">&times;</button>
+        <h2 id="constsFound">You've found:</h2>
+        <h3 id="noConsts">No found constellations!</h3>
+        <div id="foundConsts">
+        </div>
+      </div>
       <div class="game">
         <h1>Location: Focused on Andromeda</h1>
-        <canvas id="gameCanvas" width="800" height="800" style="border:1px solid #d3d3d3;">
-          Your browser does not support the canvas element.
-        </canvas>
+
+        <div class="gameCanvas">
+          <button id="showFoundConsts" type="button">Found Constellations</button>
+          <canvas id="gameCanvas" width="800" height="800" style="border:1px solid #d3d3d3;">
+            Your browser does not support the canvas element.
+          </canvas>
+        </div>
       </div>
     </div>
-  </div>
 </body>
-
 </html>
