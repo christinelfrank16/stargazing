@@ -42,7 +42,7 @@ $(document).ready(function() {
   var randomColorArray = ['#ffedb2', '#fffe9f', '#ffbf87', '#ff9867'];
   var constellationColorArrayMedium = ['#ffedb2', '#fffe9f', '#40E0D0', '#9ee6cf'];
   var constellationColorArrayHard = ['#ffedb2', '#fffe9f', '#ffbf87', '#9ee6cf'];
-  var starsArray = generateRandomStars(500, canvasWidth, canvasHeight, randomColorArray);
+  var starsArray = generateRandomStars(1000, canvasWidth, canvasHeight, randomColorArray);
 
   cvs.addEventListener("click", function(event) {
     getClickedPosition(cvs, event, fovConsts);
@@ -52,12 +52,14 @@ $(document).ready(function() {
   $('[aria-labelledby=dropdownMenu1]').click(function(event){
     event.preventDefault();
     difficulty = event.target.value;
+    $('.difficulty .dropdown-toggle').text(event.target.innerHTML);
     draw(fovConsts, starsArray, ctx, difficultyColors(difficulty),randomColorArray);
   });
 
   //begin button
   $('button[name=startGame]').click(function(){
     draw(fovConsts, starsArray, ctx, difficultyColors(difficulty),randomColorArray);
+    $('.intro').hide();
     $('.game').show();
     $('button[name=startGame]').hide();
   });
@@ -153,7 +155,7 @@ function draw(localConstalltions, starsArray, ctx, constellationColorArray, rand
           ctx.fillText(constellation.name, constellation.x, constellation.y);
           ctx.stroke();
         } else {
-          ctx.strokeStyle = "#ff0000";
+          ctx.strokeStyle = "#C0C0C0";
           ctx.beginPath();
           ctx.moveTo(points[id1][0], points[id1][1]);
           ctx.lineTo(points[id2][0], points[id2][1])
@@ -209,7 +211,7 @@ function difficultyColors(difficultyChosen){
   }else if (difficultyChosen=== "hard"){
     return ['#ffedb2', '#fffe9f', '#ffbf87', '#9ee6cf'];
   }else if (difficultyChosen=== "easy"){
-    return ['#9ee6cf'];
+    return ['#9ee6cf','#40E0D0','#99f0ca','#c9fdd7'];
   }else{
     return ['#ffedb2', '#fffe9f', '#ffbf87', '#ff9867'];
   }
