@@ -54,9 +54,16 @@
     <h2>Welcome to Stargazer, a interactive site that will allow you to view, learn and play with the constellation.</h2>
     <h3> What are you waiting for! Go Explore!! </h3>
     <div class="row">
-
+      <div id="foundConstellations" class="sidenav">
+        <button id="closeFoundConsts" type="button" class="closebtn">&times;</button>
+        <h2 id="constsFound">You've found:</h2>
+        <h3 id="noConsts">No found constellations!</h3>
+        <div id="foundConsts">
+        </div>
+      </div>
       <div class="game">
         <button type="button" name="startGame">Begin</button>
+        <button id="showFoundConsts" type="button">Found Constellations</button>
         <canvas id="gameCanvas" width="800" height="800" style="border:1px solid #d3d3d3;">
           Your browser does not support the canvas element.
         </canvas>

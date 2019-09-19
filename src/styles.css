@@ -51,3 +51,33 @@ h3,h2 {
   max-height: 20rem;
   overflow-y: auto;
 }
+
+/* Side bar styling */
+.sidenav {
+  height: 70%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 30%;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.game {
+  transition: margin-left .5s;
+  padding: 20px;
+}
+#constsFound {
+  display: none;
+}
