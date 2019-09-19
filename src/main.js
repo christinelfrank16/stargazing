@@ -38,7 +38,6 @@ $(document).ready(function() {
   let convert = convertConstellations(constellations.Constellations, 0.139805556, 29.09055556, 120, 0, 800, 800);
   let fovConsts = fovConstellations(convert, 800, 800);
 
-  var gamePlayMusic = new Audio(gamePlayMusicI);
   var randomColorArray = ['#ffedb2', '#fffe9f', '#ffbf87', '#ff9867'];
   var constellationColorArrayMedium = ['#ffedb2', '#fffe9f', '#40E0D0', '#9ee6cf'];
   var constellationColorArrayHard = ['#ffedb2', '#fffe9f', '#ffbf87', '#9ee6cf'];
@@ -48,12 +47,9 @@ $(document).ready(function() {
   cvs.addEventListener("click", function(event) {
     console.log(difficultyNumberStars(difficulty));
     getClickedPosition(cvs, event, fovConsts);
-<<<<<<< Updated upstream
     $('#foundConsts').html('');
     displayFound(fovConsts);
-=======
     soundButtonClickPress.play();
->>>>>>> Stashed changes
   });
 
   //difficulty setting
@@ -62,12 +58,9 @@ $(document).ready(function() {
     difficulty = event.target.value;
     difficultyStars = difficultyNumberStars(difficulty);
     $('.difficulty .dropdown-toggle').text(event.target.innerHTML);
-<<<<<<< Updated upstream
+
     draw(fovConsts, starsArray, ctx, difficultyColors(difficulty), randomColorArray, difficultyStars);
-=======
     soundDropDownSoundEffect.play();
-    draw(fovConsts, starsArray, ctx, difficultyColors(difficulty), randomColorArray);
->>>>>>> Stashed changes
   });
 
   //begin button
