@@ -3,12 +3,12 @@ import {
 } from './coordinates.js';
 
 export class Star {
-  constructor(id, name, constellation, ra, dec, ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight) {
+  constructor(id, name, constellation, ra, dec, centerRa, centerDec, fov, displayRotation, screenWidth, screenHeight) {
     this.id = id;
     this.name = name;
     this.constellation = constellation;
     this.celestial = new CelestialCoordinates(ra, dec);
-    this.xy = this.celestial.coverttoXYfromCelestial(ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight);
+    this.xy = this.celestial.coverttoXYfromCelestial(centerRa, centerDec, fov, displayRotation, screenWidth, screenHeight);
     this.x = this.xy.x;
     this.y = this.xy.y;
     this.clicked = false;
@@ -16,13 +16,13 @@ export class Star {
 }
 
 export class Constellation {
-  constructor(name, ra, dec,ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight) {
+  constructor(name, ra, dec,centerRa, centerDec, fov, displayRotation, screenWidth, screenHeight) {
     this.name = name;
     this.stars = [];
     this.ra = ra;
     this.dec = dec;
     this.cellestial = new CelestialCoordinates(ra, dec);
-    this.xy = this.cellestial.coverttoXYfromCelestial(ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight);
+    this.xy = this.cellestial.coverttoXYfromCelestial(centerRa, centerDec, fov, displayRotation, screenWidth, screenHeight);
     this.x = this.xy.x;
     this.y = this.xy.y;
     this.completed = false;
@@ -43,14 +43,14 @@ export function generateRandomStars(length, screenWidth, screenHeight, colorArra
 }
 
 
-export function convertConstellations(constellationObjs, ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight) {
+export function convertConstellations(constellationObjs, centerRa, centerDec, fov, displayRotation, screenWidth, screenHeight) {
   let convertedConstellations = [];
 
   constellationObjs.forEach(function(constellation) {
-    let constObj = new Constellation(constellation.Name, constellation.RAh, constellation.DEd,ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight);
+    let constObj = new Constellation(constellation.Name, constellation.RAh, constellation.DEd,centerRa, centerDec, fov, displayRotation, screenWidth, screenHeight);
 
     constellation.stars.forEach(function(star) {
-      let starObj = new Star(star.id, star.starName, constellation.Name, star.RAh, star.DEd, ceterRa, centerDec, fov, displayRotation, screenWidth, screenHeight);
+      let starObj = new Star(star.id, star.starName, constellation.Name, star.RAh, star.DEd, centerRa, centerDec, fov, displayRotation, screenWidth, screenHeight);
       constObj.stars.push(starObj);
     });
 
@@ -107,7 +107,6 @@ export function getClickedPosition(cvs, event, fovConsts) {
     if(constellation.completed === false){
       constellation.stars.forEach(function(star){
         if((Math.abs(star.x - cordX) < 10) && (Math.abs(star.y - cordY) < 10)){
-          console.log("clicked star!", star.name);
           star.clicked = true;
         }
       });
@@ -117,7 +116,6 @@ export function getClickedPosition(cvs, event, fovConsts) {
           constComplete = false;
         }
       });
-      console.log(fovConsts);
       constellation.completed = constComplete;
     }
   });

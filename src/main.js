@@ -12,16 +12,14 @@ const constellations = require('./data/constellations.json');
 
  $(document).ready(function() {
 
-   let convertedConstellation;
    let localConstalltion;
 
    var cvs = document.getElementById("gameCanvas");
    var ctx = cvs.getContext("2d");
    var canvasWidth = document.getElementById("gameCanvas").width;
    var canvasHeight = document.getElementById("gameCanvas").height;
-   const convert = convertConstellations(constellations.Constellations,0.139805556,29.09055556,120,0,800,800);
+   let convert = convertConstellations(constellations.Constellations,0.139805556,29.09055556,120,0,800,800);
    let fovConsts = fovConstellations(convert,800,800);
-   console.log(fovConsts);
 
    var randomColorArray = ['#ffedb2','#fffe9f','#ffbf87','#ff9867'];
    var constellationColorArray = ['#ffedb2','#fffe9f','#ffbf87','#9ee6cf'];
@@ -54,40 +52,19 @@ const constellations = require('./data/constellations.json');
     const lat = parseFloat(cityLatLong.substring(0, cityLatLong.indexOf(',')));
     const long = parseFloat(cityLatLong.substring(cityLatLong.indexOf(',')+1));
     converter = new LatLongConverter(lat, long);
+    convert = convertConstellations(constellations.Constellations,converter.rightAscention/15,converter.declination,120,0,800,800);
+    fovConsts = fovConstellations(convert,800,800);
+    draw(fovConsts, starsArray, ctx, constellationColorArray,randomColorArray);
     $('#citiesDropDown').text($(this)[0].innerHTML);
     $('#citiesDropDown').dropdown('toggle');
   });
 
-  // $('startGame').onClick(function(){
-  //   const centerRA = val();
-  //   const centerDec = val();
-  //   const fov = 180;
-  //   const dispRot = 0;
-  //   const canvasWidth = document.getElementById("gameCanvas").width;
-  //   const canvasHeight = document.getElementById("gameCanvas").height;
-  //   convertConstellations = convertConstellations(constellations.Constellations, centerRA, centerDec,fov,dispRot,canvasWidth,canvasHeight);
-  //   localConstalltion = fovConstellations(convertConstellation,screenWidth,screenHeight);
-  // });
-
-
-
-  // const testCoord1 = new CelestialCoordinates(2.651944444,89.2641667);
-  // console.log(testCoord1);
-  // const testCoord3 = testCoord1.coverttoXYfromCelestial(2.651944444,89.2641667, 60, 0, 1000);
-  // console.log('test3', testCoord3);
-  //
-  // console.log(testConstellation);
-  // plotConstellation(testConstellation,0.139805556,29.09055556,180,0,800,800);
-  //
-  // testConstellation2.Constellation.forEach(function(constellation){
-  //   plotConstellation(constellation,0.139805556,29.09055556,180,0,800,800);
-  // });
 
 });
 
 
 function draw(localConstalltions, starsArray, ctx, constellationColorArray, randomColorArray) {
-
+  ctx.clearRect(0,0,800,800);
 
   //if you need to draw some image (the 0,0 starts top left)
   // ctx.drawImage(imgName,x,y);
@@ -166,7 +143,6 @@ function buildDropDown(input){
 function filterCities(word){
   let items = $('.dropdown-item');
   let length = items.length;
-  let collection = [];
   let hidden = 0;
 
   for(let i=0; i< length; i++){
