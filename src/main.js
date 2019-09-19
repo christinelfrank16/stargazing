@@ -39,7 +39,7 @@ $(document).ready(function() {
    let fovConsts = fovConstellations(convert,800,800);
 
   var randomColorArray = ['#ffedb2', '#fffe9f', '#ffbf87', '#ff9867'];
-  var constellationColorArray = ['#ffedb2', '#fffe9f', '#ffbf87', '#9ee6cf'];
+  var constellationColorArray = ['#ffedb2', '#fffe9f', '#40E0D0', '#9ee6cf'];
   var starsArray = generateRandomStars(500, canvasWidth, canvasHeight, randomColorArray);
 
   cvs.addEventListener("click", function(event) {
