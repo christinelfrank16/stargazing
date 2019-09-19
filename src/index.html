@@ -68,7 +68,13 @@
       <h3> What are you waiting for! Go Explore!! </h3>
     </div>
     <div class="row text-center">
-      <button type="button" class='btn btn-secondary' name="startGame">Begin</button>
+      <button type="button" class='btn btn-secondary' name="startGame">Begin</button><br>
+      <div class="tutorial">
+        <button type="button" name="tutorial">Start Tutorial</button>
+        <canvas id="tutorialCanvas" width="800" height="800"style="border:1px solid #d3d3d3;">
+          Your browser does not support the canvas element.
+        </canvas>
+      </div>
       <div id="foundConstellations" class="sidenav">
         <button id="closeFoundConsts" type="button" class="closebtn">&times;</button>
         <h2 id="constsFound">You've found:</h2>
@@ -81,6 +87,7 @@
 
         <div class="gameCanvas">
           <button id="showFoundConsts" class='btn btn-secondary' type="button">Found Constellations</button>
+
           <canvas id="gameCanvas" width="800" height="800" style="border:1px solid #d3d3d3;">
             Your browser does not support the canvas element.
           </canvas>
