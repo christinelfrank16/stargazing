@@ -62,7 +62,7 @@ $(document).ready(function() {
   });
 
   $('#showFoundConsts').click(function(){
-    $('#foundConstellations').width('250px');
+    $('#foundConstellations').width('22em');
     $('#foundConsts').html('');
     displayFound(fovConsts);
     if($('.fConst').length > 0){
