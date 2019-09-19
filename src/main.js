@@ -11,9 +11,24 @@ import {  Star,  Constellation,  generateRandomStars,  convertConstellations,  f
   getClickedPosition } from './js/starStuff.js'
 import { displayFound } from './js/displayFound';
 const constellations = require('./data/constellations.json');
+
+// audio files
 let gamePlayMusicI= require('./audio/constellationGamePlayMusic.m4a');
+let soundButtonClickPressI= require('./audio/soundButtonClickPress.wav');
+let soundButtonClickReleaseI= require('./audio/soundButtonClickRelease.wav');
+let soundButtonDropDownHoverI= require('./audio/soundButtonDropDownHover.wav');
+let soundDropDownSoundEffectI= require('./audio/soundDropDownSoundEffect.wav');
 
 $(document).ready(function() {
+
+
+// audio files
+  var gamePlayMusic = new Audio(gamePlayMusicI);
+  var soundButtonClickPress = new Audio(soundButtonClickPressI);
+  var soundButtonClickRelease = new Audio(soundButtonClickReleaseI);
+  var soundButtonDropDownHover = new Audio(soundButtonDropDownHoverI);
+  var soundDropDownSoundEffect = new Audio(soundDropDownSoundEffectI);
+
 
   let localConstalltion;
 
@@ -21,26 +36,33 @@ $(document).ready(function() {
   var ctx = cvs.getContext("2d");
   var canvasWidth = document.getElementById("gameCanvas").width;
   var canvasHeight = document.getElementById("gameCanvas").height;
+
   var cvs2 = document.getElementById("tutorialCanvas");
   var ctx2 = cvs2.getContext("2d");
   var canvasWidth2 = document.getElementById("tutorialCanvas").width;
   var canvasHeight2 = document.getElementById("tutorialCanvas").height;
+
+
   var difficulty;
   let convert = convertConstellations(constellations.Constellations, 0.139805556, 29.09055556, 120, 0, 800, 800);
   let fovConsts = fovConstellations(convert, 800, 800);
 
 
+
   var gamePlayMusic = new Audio(gamePlayMusicI);
   var randomColorArrayTutorial = ['#FF5CFF','#FF7DFF','#FF97FF','#FFACFF'];
   var randomColorArray = ['#ffedb2', '#fffe9f', '#ffbf87', '#ff9867'];
-  var constellationColorArrayMedium = ['#ffedb2', '#fffe9f', '#40E0D0', '#9ee6cf'];
-  var constellationColorArrayHard = ['#ffedb2', '#fffe9f', '#ffbf87', '#9ee6cf'];
   var constellationTutorialArray = ['#5CFF5C','#7DFF7D','#97FF97','#ACFFAC'];
-  var starsArray = generateRandomStars(1000, canvasWidth, canvasHeight, randomColorArray);
+  var starsArray = generateRandomStars(2000, canvasWidth, canvasHeight, randomColorArray);
   var starsArrayTutorial = generateRandomStars(500, canvasWidth2, canvasHeight2, randomColorArrayTutorial);
+  var difficultyStars = difficultyNumberStars(difficulty);
 
   cvs.addEventListener("click", function(event) {
+    console.log(difficultyNumberStars(difficulty));
     getClickedPosition(cvs, event, fovConsts);
+    $('#foundConsts').html('');
+    displayFound(fovConsts);
+    soundButtonClickPress.play()
   });
   cvs2.addEventListener("click", function(event) {
     getClickedPosition(cvs2, event, fovConsts);
@@ -58,8 +80,12 @@ $(document).ready(function() {
   $('[aria-labelledby=dropdownMenu1]').click(function(event) {
     event.preventDefault();
     difficulty = event.target.value;
+    difficultyStars = difficultyNumberStars(difficulty);
     $('.difficulty .dropdown-toggle').text(event.target.innerHTML);
-    draw(fovConsts, starsArray, ctx, difficultyColors(difficulty), randomColorArray);
+
+    draw(fovConsts, starsArray, ctx, difficultyColors(difficulty), randomColorArray, difficultyStars);
+    soundDropDownSoundEffect.play();
+
   });
 
   //begin button
@@ -70,7 +96,8 @@ $(document).ready(function() {
 }, false);
     gamePlayMusic.play();
     // $('body').append('<audio autoPlay src={gamePlayMusicI}></audio>');
-    draw(fovConsts, starsArray, ctx, randomColorArray);
+    draw(fovConsts, starsArray, ctx, difficultyColors(difficulty), randomColorArray,difficultyStars);
+
     $('.intro').hide();
     $('.game').show();
     $('button[name=startGame]').hide();
@@ -86,12 +113,13 @@ $(document).ready(function() {
 
   $('#searchLocation').submit(function(event) {
     event.preventDefault();
+    soundButtonClickRelease.play();
     const searchValue = $('#searchCities').val();
     buildDropDown(searchValue);
     $('#searchCities').val('');
   });
-
   $('#cityItems').on('click', '.dropdown-item', function(event) {
+    soundButtonDropDownHover.play();
     const cityLatLong = $(this)[0].value;
     const lat = parseFloat(cityLatLong.substring(0, cityLatLong.indexOf(',')));
     const long = parseFloat(cityLatLong.substring(cityLatLong.indexOf(',') + 1));
@@ -99,12 +127,12 @@ $(document).ready(function() {
     convert = convertConstellations(constellations.Constellations, converter.rightAscention / 15, converter.declination, 120, 0, 800, 800);
     fovConsts = fovConstellations(convert, 800, 800);
     $('.game h1').text('Location: ' + this.innerHTML);
-    draw(fovConsts, starsArray, ctx, difficultyColors(difficulty), randomColorArray);
+
+    draw(fovConsts, starsArray, ctx, difficultyColors(difficulty), randomColorArray,difficultyStars);
     $('#citiesDropDown').text($(this)[0].innerHTML);
     $('#citiesDropDown').dropdown('toggle');
   });
-  //
-  $('#showFoundConsts').click(function(){
+    $('#showFoundConsts').click(function(){
     $('#foundConstellations').width('22em');
     $('#foundConsts').html('');
     displayFound(fovConsts);
@@ -125,7 +153,6 @@ $(document).ready(function() {
 
 function drawTutorial(localConstalltions, starsArrayTutorial, ctx2, constellationColorArrayTutorial, randomColorArrayTutorial) {
   ctx2.clearRect(0, 0, 800, 800);
-
 
   //if you need to draw some image (the 0,0 starts top left)
   // ctx2.drawImage(imgName,x,y);
@@ -192,9 +219,8 @@ function drawTutorial(localConstalltions, starsArrayTutorial, ctx2, constellatio
   });
 }
 
-function draw(localConstalltions, starsArray, ctx, constellationColorArray, randomColorArray) {
+function draw(localConstalltions, starsArray, ctx, constellationColorArray, randomColorArray, difficultyNoS) {
   ctx.clearRect(0, 0, 800, 800);
-
 
   //if you need to draw some image (the 0,0 starts top left)
   // ctx.drawImage(imgName,x,y);
@@ -216,14 +242,15 @@ function draw(localConstalltions, starsArray, ctx, constellationColorArray, rand
       }
     });
   });
-  //draw all random stars
-  starsArray.forEach(function(star) {
+  //draw all random star
+  for(let i = 0; i<difficultyNoS; i++){
+    let star = starsArray[i];
+
     ctx.strokeStyle = randomColorArray[Math.floor(Math.random() * randomColorArray.length)];
     ctx.beginPath();
     ctx.strokeRect(star.x, star.y, 2, 2);
     ctx.stroke();
-  });
-
+  }
   //code to draw your lines (greyed out), if you click and mouse over 2 points that are correct, then you can have a green line for success
   localConstalltions.forEach(function(constellation) {
     constellation.lines.forEach(function(points) {
@@ -263,7 +290,8 @@ function draw(localConstalltions, starsArray, ctx, constellationColorArray, rand
   });
 
   window.requestAnimationFrame(function() {
-    draw(localConstalltions, starsArray, ctx, constellationColorArray, randomColorArray);
+  draw(localConstalltions, starsArray, ctx, constellationColorArray, randomColorArray, difficultyNoS);
+
   });
 }
 
@@ -310,5 +338,17 @@ function difficultyColors(difficultyChosen) {
     return ['#9ee6cf', '#40E0D0', '#99f0ca', '#c9fdd7'];
   } else {
     return ['#ffedb2', '#fffe9f', '#ffbf87', '#ff9867'];
+  }
+}
+
+function difficultyNumberStars(difficultyChosen){
+  if (difficultyChosen === "medium") {
+    return 500;
+  } else if (difficultyChosen === "hard") {
+    return 1000;
+  } else if (difficultyChosen === "easy") {
+    return 250;
+  } else {
+    return 2000;
   }
 }

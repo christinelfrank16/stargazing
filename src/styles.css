@@ -2,6 +2,8 @@ body {
   color: grey;
   background-color: black;
   color: white;
+  text-align: center;
+
 }
 
 .game {
@@ -16,11 +18,17 @@ body {
   font-family: Bangers;
   font-size: 72pt;
   font-stretch: expanded;
+
+}
+
+.btn{
+  margin: auto;
 }
 .game{
   max-width: 810px;
   margin: auto;
 }
+
 
 .container {
   text-align: center;
@@ -63,22 +71,11 @@ h3, h2 {
   border-color: grey;
 }
 
-/* #cities .dropdown-menu {
-  background-color: #555555;
-}
-
-#cities .dropdown-item {
-  color: white;
-}
-
-#cities .dropdown-item:hover {
-  background-color: #A2A2A2;
-} */
-
 #cityItems {
   max-height: 20rem;
   overflow-y: auto;
 }
+
 /* Side bar styling */
 .sidenav {
   height: 70%;
@@ -107,7 +104,9 @@ h3, h2 {
 }
 #constsFound {
   display: none;
+
 }
 #tutorialCanvas {
   display: none;
+
 }
