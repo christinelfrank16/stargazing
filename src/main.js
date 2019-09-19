@@ -47,9 +47,6 @@ $(document).ready(function() {
   let convert = convertConstellations(constellations.Constellations, 0.139805556, 29.09055556, 120, 0, 800, 800);
   let fovConsts = fovConstellations(convert, 800, 800);
 
-
-
-  var gamePlayMusic = new Audio(gamePlayMusicI);
   var randomColorArrayTutorial = ['#FF5CFF','#FF7DFF','#FF97FF','#FFACFF'];
   var randomColorArray = ['#ffedb2', '#fffe9f', '#ffbf87', '#ff9867'];
   var constellationTutorialArray = ['#5CFF5C','#7DFF7D','#97FF97','#ACFFAC'];
@@ -58,11 +55,21 @@ $(document).ready(function() {
   var difficultyStars = difficultyNumberStars(difficulty);
 
   cvs.addEventListener("click", function(event) {
-    console.log(difficultyNumberStars(difficulty));
     getClickedPosition(cvs, event, fovConsts);
     $('#foundConsts').html('');
     displayFound(fovConsts);
     soundButtonClickPress.play()
+  });
+  cvs2.addEventListener("click", function(event) {
+    getClickedPosition(cvs2, event, fovConsts);
+  });
+
+  $('button[name=tutorial]').click(function(){
+    drawTutorial(fovConsts, starsArrayTutorial, ctx2, constellationTutorialArray, randomColorArrayTutorial);
+    $('.intro').hide();
+    $('.tutorial').show();
+    $('#tutorialCanvas').show();
+    $('button[name=tutorial]').hide();
   });
   cvs2.addEventListener("click", function(event) {
     getClickedPosition(cvs2, event, fovConsts);
@@ -95,9 +102,7 @@ $(document).ready(function() {
     this.play();
 }, false);
     gamePlayMusic.play();
-    // $('body').append('<audio autoPlay src={gamePlayMusicI}></audio>');
     draw(fovConsts, starsArray, ctx, difficultyColors(difficulty), randomColorArray,difficultyStars);
-
     $('.intro').hide();
     $('.game').show();
     $('button[name=startGame]').hide();
@@ -132,7 +137,8 @@ $(document).ready(function() {
     $('#citiesDropDown').text($(this)[0].innerHTML);
     $('#citiesDropDown').dropdown('toggle');
   });
-    $('#showFoundConsts').click(function(){
+
+  $('#showFoundConsts').click(function(){
     $('#foundConstellations').width('22em');
     $('#foundConsts').html('');
     displayFound(fovConsts);
@@ -153,10 +159,6 @@ $(document).ready(function() {
 
 function drawTutorial(localConstalltions, starsArrayTutorial, ctx2, constellationColorArrayTutorial, randomColorArrayTutorial) {
   ctx2.clearRect(0, 0, 800, 800);
-
-  //if you need to draw some image (the 0,0 starts top left)
-  // ctx2.drawImage(imgName,x,y);
-
 
   //draw all constellation stars
   localConstalltions.forEach(function(constellation) {

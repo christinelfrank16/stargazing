@@ -75,7 +75,6 @@ h3, h2 {
   max-height: 20rem;
   overflow-y: auto;
 }
-
 /* Side bar styling */
 .sidenav {
   height: 70%;
@@ -108,5 +107,4 @@ h3, h2 {
 }
 #tutorialCanvas {
   display: none;
-
 }
