@@ -60,6 +60,10 @@ $(document).ready(function() {
 
   //begin button
   $('button[name=startGame]').click(function() {
+    gamePlayMusic.addEventListener('ended', function() {
+    this.currentTime = 0;
+    this.play();
+}, false);
     gamePlayMusic.play();
     // $('body').append('<audio autoPlay src={gamePlayMusicI}></audio>');
     draw(fovConsts, starsArray, ctx, difficultyColors(difficulty), randomColorArray);
