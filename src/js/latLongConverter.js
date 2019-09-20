@@ -1,3 +1,6 @@
+const moment = require('moment-timezone');
+const tzlookup = require('tz-lookup');
+
 export class LatLongConverter {
   constructor(lat, long) {
     //latitude
@@ -5,9 +8,12 @@ export class LatLongConverter {
     //longitude
     this.longitude = long; // degrees
 
+    this.date = new Date();
+    this.timeZone = tzlookup(lat, long);
+
     //assume looking straight up in sky
     this.declination = lat; // hours
-    
+
     const julDay = this.convertJulianDay();
     const last = this.calcLAST(julDay, long);
 

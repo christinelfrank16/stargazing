@@ -6,7 +6,7 @@
   "scripts": {
     "test": "./node_modules/karma/bin/karma start karma.conf.js",
     "build": "webpack --mode development",
-    "start": "npm run build; webpack-dev-server --open --mode development",
+    "start": "npm run build & webpack-dev-server --open --mode development",
     "final": "webpack --mode production",
     "lint": "eslint src/*.js"
   },
@@ -45,6 +45,8 @@
     "cities": "^2.0.0",
     "jquery": "^3.4.1",
     "jsonlint": "^1.6.3",
-    "popper.js": "^1.15.0"
+    "moment-timezone": "^0.5.26",
+    "popper.js": "^1.15.0",
+    "tz-lookup": "^6.1.24"
   }
 }
