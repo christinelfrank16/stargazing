@@ -11,6 +11,7 @@ import {  Star,  Constellation,  generateRandomStars,  convertConstellations,  f
   getClickedPosition } from './js/starStuff.js'
 import { displayFound } from './js/displayFound';
 const constellations = require('./data/constellations.json');
+import { getLocal } from './js/getLocalCoords';
 
 // audio files
 let gamePlayMusicI= require('./audio/constellationGamePlayMusic.m4a');
@@ -21,6 +22,24 @@ let soundDropDownSoundEffectI= require('./audio/soundDropDownSoundEffect.wav');
 
 $(document).ready(function() {
 
+let local = {
+  latitude: 45.5051,
+  longitude: -122.6750
+};
+let converter;
+let localPromise = getLocal(local);
+localPromise.then(function(response){
+
+  console.log(response, local);
+  if(response.latitude && response.longitude){
+    local.latitude = response.latitude;
+    local.longitude = response.longitude;
+  }
+  converter = new LatLongConverter(local.latitude, local.longitude); // use location of IP
+});
+
+
+
 
 // audio files
   var gamePlayMusic = new Audio(gamePlayMusicI);
@@ -28,6 +47,8 @@ $(document).ready(function() {
   var soundButtonClickRelease = new Audio(soundButtonClickReleaseI);
   var soundButtonDropDownHover = new Audio(soundButtonDropDownHoverI);
   var soundDropDownSoundEffect = new Audio(soundDropDownSoundEffectI);
+
+  buildDropDown("");
 
 
   let localConstalltion;
@@ -108,9 +129,6 @@ $(document).ready(function() {
     $('button[name=startGame]').hide();
   });
 
-
-  let converter = new LatLongConverter(45.5051, -122.6750); // default to portland, OR
-  buildDropDown("");
 
   $('#searchLocation').on('input', function() {
     filterCities($('#searchCities').val().trim().toLowerCase());

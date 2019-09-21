@@ -1,4 +1,3 @@
-const moment = require('moment-timezone');
 const tzlookup = require('tz-lookup');
 
 export class LatLongConverter {
@@ -8,8 +7,13 @@ export class LatLongConverter {
     //longitude
     this.longitude = long; // degrees
 
-    this.date = new Date();
+    console.log(this.latitude, this.longitude);
     this.timeZone = tzlookup(lat, long);
+    console.log(this.timeZone);
+    let currentTime = require('current-timezone')(this.timeZone);
+    // this.date = currentTime(this.timeZone);
+    this.date = currentTime;
+    console.log(this.date, typeof this.date);
 
     //assume looking straight up in sky
     this.declination = lat; // hours
@@ -22,7 +26,7 @@ export class LatLongConverter {
 
   convertJulianDay(){
     // reference: https://en.wikipedia.org/wiki/Julian_day#Julian_date_calculation
-    const nowDate = new Date();
+    const nowDate = this.date;
 
     const date = nowDate.getDate();
     const month = nowDate.getMonth()+1; // base 0 for January
