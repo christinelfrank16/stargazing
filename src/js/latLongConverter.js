@@ -1,19 +1,23 @@
 const tzlookup = require('tz-lookup');
+const moment = require('moment-timezone');
+
 
 export class LatLongConverter {
-  constructor(lat, long) {
+  constructor(lat, long, local) {
     //latitude
     this.latitude = lat; // degrees
     //longitude
     this.longitude = long; // degrees
 
-    console.log(this.latitude, this.longitude);
     this.timeZone = tzlookup(lat, long);
-    console.log(this.timeZone);
-    let currentTime = require('current-timezone')(this.timeZone);
-    // this.date = currentTime(this.timeZone);
-    this.date = currentTime;
-    console.log(this.date, typeof this.date);
+
+    if((this.timeZone !== local.timezone) && local.time) {
+      const local = moment((local.time).toISOString(), local.timezone);
+      this.date = local.clone().tx(this.timezone);
+    } else if((this.timeZone !== local.timezone)){
+      this.date = getZoneTime(timezone)
+    }
+
 
     //assume looking straight up in sky
     this.declination = lat; // hours
@@ -97,4 +101,13 @@ export class LatLongConverter {
     return obliquity; // result in degrees
   }
 
+}
+
+function getZoneTime(timeZone){
+  return new Promise((resolve,reject) => {
+    // $.getJSON('https://json.geoiplookup.io/api?callback=?', function(data) {
+    $.getJSON('http://worldtimeapi.org/api/timezone/' + timeZone, function(data) {
+      resolve(data);
+    });
+  });
 }

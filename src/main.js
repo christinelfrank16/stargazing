@@ -11,7 +11,7 @@ import {  Star,  Constellation,  generateRandomStars,  convertConstellations,  f
   getClickedPosition } from './js/starStuff.js'
 import { displayFound } from './js/displayFound';
 const constellations = require('./data/constellations.json');
-import { getLocal } from './js/getLocalCoords';
+import { Local } from './js/getLocal';
 
 // audio files
 let gamePlayMusicI= require('./audio/constellationGamePlayMusic.m4a');
@@ -22,21 +22,29 @@ let soundDropDownSoundEffectI= require('./audio/soundDropDownSoundEffect.wav');
 
 $(document).ready(function() {
 
-let local = {
-  latitude: 45.5051,
-  longitude: -122.6750
-};
-let converter;
-let localPromise = getLocal(local);
-localPromise.then(function(response){
+  let local = {
+    latitude: 45.5051,
+    longitude: -122.6750
+  };
 
-  console.log(response, local);
-  if(response.latitude && response.longitude){
-    local.latitude = response.latitude;
-    local.longitude = response.longitude;
-  }
-  converter = new LatLongConverter(local.latitude, local.longitude); // use location of IP
-});
+  setLocal(local);
+
+
+// let converter;
+// let localCoordsPromise = getLocalCoords();
+// let localTimePromise = getLocalTime();
+// Promise.all([localCoordsPromise, localTimePromise]).then(function(responses){
+//   const coordsResp = responses[0];
+//   const timeResp = responses[1];
+//   if(coordsResp && timeResp){
+//     local.latitude = coordsResp.latitude;
+//     local.longitude = coordsResp.longitude;
+//     local.time = new Date(timeResp.datetime);
+//   }
+//
+// });
+
+
 
 
 
@@ -371,4 +379,9 @@ function difficultyNumberStars(difficultyChosen){
   } else {
     return 2000;
   }
+}
+
+async function setLocal(local){
+  await local = new Local();
+  converter = new LatLongConverter(local.latitude, local.longitude); // use location of IP
 }
